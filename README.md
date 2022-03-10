@@ -1,8 +1,8 @@
 # BananaAlbumApp
-GIT MVVM + LiveData and RecyclerView
-Folder App:
-Adapter : Chứa Adapter của RecyclerView
-Util: Chứa các file api, connect database, ...
-Model: Chứa các class, các method để query database ( Ví dụ Class: User , File Dao: UserDao)
-Views: Chứa các activities/fragment
-ViewModel: Chứa ViewModel tương ứng
+GIT MVVM + LiveData and RecyclerView<br/>
+Folder App:<br/>
+Adapter : Chứa Adapter của RecyclerView<br/>
+Util: Chứa các file api, connect database, ...<br/>
+Model: Chứa các class, các method để query database ( Ví dụ Class: User , File Dao: UserDao)<br/>
+Views: Chứa các activities/fragment<br/>
+ViewModel: Chứa ViewModel tương ứng<br/>
