@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/layout/activity_main.xml" value="0.2598958333333333" />
-        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/layout/activity_main_screen.xml" value="0.1390625" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_photo_album.xml" value="0.1505" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_photo_camera.xml" value="0.1505" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/drawable/selector.xml" value="0.1505" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/layout/activity_main_screen.xml" value="0.16" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/menu/main_tab_bar.xml" value="0.11543394613082514" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Android/BananaAlbumApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.253" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Code/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Code/app/src/main/res/layout/itemuser.xml" value="0.33" />
       </map>

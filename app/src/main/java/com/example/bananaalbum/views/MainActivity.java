@@ -42,34 +42,34 @@ public class MainActivity extends AppCompatActivity {
         //Remove action bar
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_screen);
 
-        rcvTest=findViewById(R.id.rcv_test);
-        btnAddUser=findViewById(R.id.btnAdd);
-
-        // set layout for RecyclerView
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rcvTest.setLayoutManager(linearLayoutManager);
-
-        // set ViewModel with LiveData
-        testViewModel = new ViewModelProvider(this).get(TestViewModel.class);
-        testViewModel.getListTestLiveData().observe(this, new Observer<List<Test>>() {
-            @Override
-            public void onChanged(List<Test> tests) {
-                //set Adapter for RecyclerView
-                testAdapter= new TestAdapter(tests);
-                rcvTest.setAdapter(testAdapter);
-
-            }
-        });
-
-        //method for button add User
-        btnAddUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Test t = new Test(R.drawable.ic_launcher_background,"Long","Dep trai lam");
-                testViewModel.addTest(t);
-            }
-        });
+//        rcvTest=findViewById(R.id.rcv_test);
+//        btnAddUser=findViewById(R.id.btnAdd);
+//
+//        // set layout for RecyclerView
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        rcvTest.setLayoutManager(linearLayoutManager);
+//
+//        // set ViewModel with LiveData
+//        testViewModel = new ViewModelProvider(this).get(TestViewModel.class);
+//        testViewModel.getListTestLiveData().observe(this, new Observer<List<Test>>() {
+//            @Override
+//            public void onChanged(List<Test> tests) {
+//                //set Adapter for RecyclerView
+//                testAdapter= new TestAdapter(tests);
+//                rcvTest.setAdapter(testAdapter);
+//
+//            }
+//        });
+//
+//        //method for button add User
+//        btnAddUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Test t = new Test(R.drawable.ic_launcher_background,"Long","Dep trai lam");
+//                testViewModel.addTest(t);
+//            }
+//        });
     }
 }
