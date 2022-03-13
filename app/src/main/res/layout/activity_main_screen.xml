@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="22dp"
         android:layout_weight="10"
-        android:background="@drawable/titlebar_cut"
+        android:background="@drawable/titlebar_cutfinalrealreal"
         android:orientation="horizontal">
 
 
@@ -70,7 +70,8 @@
             android:id="@+id/nav_tab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:itemBackground="@color/white"
+
+            app:itemBackground="@color/skin"
             app:menu="@menu/main_tab_bar" />
 
     </LinearLayout>
