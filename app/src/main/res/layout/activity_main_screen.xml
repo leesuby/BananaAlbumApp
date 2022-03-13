@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="22dp"
-        android:layout_weight="12"
+        android:layout_weight="10"
         android:background="@drawable/titlebar_cut"
         android:orientation="horizontal">
 
@@ -26,13 +26,13 @@
             android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/profile_image"
+            app:layout_constraintEnd_toStartOf="@+id/imgProfile"
             app:layout_constraintHorizontal_bias="0.354"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/imgProfile"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginEnd="28dp"
@@ -50,13 +50,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fragment_navTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="51">
+        android:layout_weight="53">
 
-    </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,14 +66,12 @@
         android:layout_weight="1">
 
 
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/tabBar"
+            android:id="@+id/nav_tab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:itemBackground="@color/white"
-            app:itemIconTint="@drawable/selector"
-            app:menu="@menu/main_tab_bar"/>
+            app:menu="@menu/main_tab_bar" />
 
     </LinearLayout>
 

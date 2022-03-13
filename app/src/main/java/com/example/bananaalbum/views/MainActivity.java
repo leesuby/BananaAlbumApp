@@ -1,12 +1,15 @@
 package com.example.bananaalbum.views;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +19,8 @@ import com.example.bananaalbum.R;
 import com.example.bananaalbum.adapters.TestAdapter;
 import com.example.bananaalbum.model.Test;
 import com.example.bananaalbum.viewmodels.TestViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.List;
 
@@ -43,6 +48,34 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_main_screen);
+
+        BottomNavigationView navTab = findViewById(R.id.nav_tab);
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,new HomeFragment()).commit();
+
+
+        navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selected = null;
+
+                switch (item.getItemId()){
+                    case R.id.home:
+                        selected = new HomeFragment();
+                        break;
+                    case R.id.pub:
+                        selected = new PublicFragment();
+                        break;
+                    case R.id.camera:
+                        selected = new CameraFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,selected).commit();
+
+                return true;
+            }
+        });
 
 //        rcvTest=findViewById(R.id.rcv_test);
 //        btnAddUser=findViewById(R.id.btnAdd);
