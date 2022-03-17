@@ -55,14 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean editMode = false;
 
     private static final int REQUEST_IMAGE_CAPTURE = 1208;
-    private static final String appID = "bananaAlbum";
-    private Uri imageUri;
-    private File createImageFile(){
-        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        final String imageFileName = "/JPEG_" + timeStamp +".jpg";
-        final File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        return new File(storageDir + imageFileName);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @SuppressLint("QueryPermissionsNeeded")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selected = null;
@@ -99,22 +92,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.camera:
                         selected = new CameraFragment();
-//                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-//                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-//                            StrictMode.setVmPolicy(builder.build());
-//                        }
-//                        final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                        if(takePictureIntent.resolveActivity(getPackageManager()) != null){
-//                            final File photoFile =  createImageFile();
-//                            imageUri = Uri.fromFile(photoFile);
-//                            final SharedPreferences myPrefs = getSharedPreferences(appID, 0);
-//                            myPrefs.edit().putString("path", photoFile.getAbsolutePath()).apply();
-//                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-//                            startActivityIfNeeded(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                        }
-//                        else{
-//                            Toast.makeText(MainActivity.this, "Your camera app is not compatible.", Toast.LENGTH_SHORT).show();
-//                        }
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,selected).commit();
@@ -179,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_PERMISSIONS  && grantResults.length > 0){
             if(notPermission()){
@@ -188,33 +165,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK){
-            return;
-        }
-        if(requestCode == REQUEST_IMAGE_CAPTURE){
-            if(imageUri == null){
-                final SharedPreferences p = getSharedPreferences(appID, 0);
-                final String path = p.getString("path", "");
-                if(path.length() < 1){
-                    recreate();
-                    return;
-                }
-                imageUri = Uri.parse("file://" + path);
-            }
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, imageUri));
-        }
-        else if(data == null){
-            recreate();
-            return;
-        }
-        final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "Loading", "Please Wait", true);
-        editMode = true;
-
-        dialog.cancel();
-    }
-
 }
