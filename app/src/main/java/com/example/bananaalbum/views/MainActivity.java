@@ -8,12 +8,27 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.bananaalbum.R;
 import com.example.bananaalbum.adapters.TestAdapter;
@@ -22,6 +37,10 @@ import com.example.bananaalbum.viewmodels.TestViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.Console;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
     private TestAdapter testAdapter;
     private TestViewModel testViewModel;
 
+    private boolean editMode = false;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1208;
+    private static final String appID = "bananaAlbum";
+    private Uri imageUri;
+    private File createImageFile(){
+        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        final String imageFileName = "/JPEG_" + timeStamp +".jpg";
+        final File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        return new File(storageDir + imageFileName);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +99,22 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.camera:
                         selected = new CameraFragment();
+//                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+//                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//                            StrictMode.setVmPolicy(builder.build());
+//                        }
+//                        final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        if(takePictureIntent.resolveActivity(getPackageManager()) != null){
+//                            final File photoFile =  createImageFile();
+//                            imageUri = Uri.fromFile(photoFile);
+//                            final SharedPreferences myPrefs = getSharedPreferences(appID, 0);
+//                            myPrefs.edit().putString("path", photoFile.getAbsolutePath()).apply();
+//                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//                            startActivityIfNeeded(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//                        }
+//                        else{
+//                            Toast.makeText(MainActivity.this, "Your camera app is not compatible.", Toast.LENGTH_SHORT).show();
+//                        }
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,selected).commit();
@@ -105,4 +151,70 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+    private static final int REQUEST_PERMISSIONS = 2461;
+    private static final String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    private static final int PERMISSIONS_COUNT = 2;
+
+    @SuppressLint("NewApi")
+    private boolean notPermission(){
+        for(int i = 0; i < PERMISSIONS_COUNT; i++){
+            if(checkSelfPermission(PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED){
+                return true;
+            }
+        }
+        return false;
+    };
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notPermission()){
+            requestPermissions(PERMISSIONS, REQUEST_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_PERMISSIONS  && grantResults.length > 0){
+            if(notPermission()){
+                ((ActivityManager) this.getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
+                recreate();
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK){
+            return;
+        }
+        if(requestCode == REQUEST_IMAGE_CAPTURE){
+            if(imageUri == null){
+                final SharedPreferences p = getSharedPreferences(appID, 0);
+                final String path = p.getString("path", "");
+                if(path.length() < 1){
+                    recreate();
+                    return;
+                }
+                imageUri = Uri.parse("file://" + path);
+            }
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, imageUri));
+        }
+        else if(data == null){
+            recreate();
+            return;
+        }
+        final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "Loading", "Please Wait", true);
+        editMode = true;
+
+        dialog.cancel();
+    }
+
 }
