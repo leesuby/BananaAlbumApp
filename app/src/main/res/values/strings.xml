@@ -3,4 +3,9 @@
     <string name="hint_search">Search album here</string>
     <string name="btnFav">Favorite</string>
     <string name="btnBin">Bin</string>
+    <string name="btnGoogle">Google</string>
+    <string name="btnFacebook">Facebook</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="btnForgotPassword">Forgot Password?</string>
+    <string name="btnSignUp">Sign Up</string>
 </resources>

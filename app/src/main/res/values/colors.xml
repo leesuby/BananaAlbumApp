@@ -15,4 +15,11 @@
     <color name="staleblue">#6A5ACD</color>
     <color name="crimson">#DC143C</color>
     <color name="blue_gray">#CDDEEE</color>
+
+    <color name="emerald">#39AEA9</color>
+    <color name="green_yellow">#E5EFC1</color>
+    <color name="pastel">#EFDAD7</color>
+    <color name="purple">#E3BEC6</color>
+    <color name="pink">#F10086</color>
+    <color name="grey">#D1D1D1</color>
 </resources>
