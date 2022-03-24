@@ -23,7 +23,7 @@ public class TestViewModel extends ViewModel {
     //Set data for LiveData
     private void initData() {
         listTest = new ArrayList<>();
-        listTest.add(new Test(R.drawable.ic_launcher_background,"Long","Dep trai"));
+        listTest.add(new Test(R.drawable.ic_baseline_favorite,"Long","Dep trai"));
 
         listTestLiveData.setValue(listTest);
     }
