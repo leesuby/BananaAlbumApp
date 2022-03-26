@@ -19,10 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BananaAlbum">
         <activity
-            android:name=".views.MainScreen"
-            android:exported="false"
-            />
-        <activity
             android:name=".views.MainActivity"
             android:exported="true"
             >

@@ -31,9 +31,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.bananaalbum.R;
-import com.example.bananaalbum.adapters.TestAdapter;
-import com.example.bananaalbum.model.Test;
-import com.example.bananaalbum.viewmodels.TestViewModel;
+
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -49,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnAddUser;
 
 
-    private TestAdapter testAdapter;
-    private TestViewModel testViewModel;
 
     private boolean editMode = false;
 
@@ -71,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main_screen);
 
-        BottomNavigationView navTab = findViewById(R.id.nav_tab);
+        BottomNavigationView navTab = findViewById(R.id.navBar);
 
-
+        navTab.setBackground(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,new HomeFragment()).commit();
 
 
@@ -93,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.camera:
                         selected = new CameraFragment();
                         break;
+                    case R.id.setting:
+                        selected = new SettingFragment();
+
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,selected).commit();
 
