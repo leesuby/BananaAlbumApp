@@ -1,6 +1,7 @@
 package com.example.bananaalbum.views;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -38,7 +39,7 @@ public class Login extends AppCompatActivity {
         Button Facebook = (Button)findViewById(R.id.ButtonFacebook);
         TextView ForgorPassword = (TextView)findViewById(R.id.ButtonForgotPassword);
         TextView SignUp = (TextView)findViewById(R.id.ButtonSignUp);
-        //Action
+        //Action Sign in
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +53,15 @@ public class Login extends AppCompatActivity {
                 }
             }
 
+        });
+        //Action Sign Up
+        SignUp.setPaintFlags(SignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, SignUp.class);
+                startActivity(intent);
+            }
         });
     }
 }

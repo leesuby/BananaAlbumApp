@@ -8,4 +8,6 @@
     <string name="btnSignIn">Sign In</string>
     <string name="btnForgotPassword">Forgot Password?</string>
     <string name="btnSignUp">Sign Up</string>
+    <string name="btnRegister">Register</string>
+    <string name="btnName">Name</string>
 </resources>
