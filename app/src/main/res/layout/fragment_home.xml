@@ -9,7 +9,9 @@
         android:id="@+id/home_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -39,9 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:paddingLeft="20dp"
             android:background="@drawable/custom_button"
             android:drawableLeft="@drawable/ic_baseline_favorite"
+            android:paddingLeft="20dp"
             android:text="@string/btnFav"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -57,9 +59,9 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="52dp"
-            android:paddingLeft="20dp"
             android:background="@drawable/custom_button"
             android:drawableLeft="@drawable/ic_baseline_restore_from_trash"
+            android:paddingLeft="20dp"
             android:paddingEnd="30dp"
             android:text="@string/btnBin"
             android:textAllCaps="false"
@@ -78,14 +80,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/AlbumRecView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_top"
-        app:layout_constraintVertical_bias="1.0"></FrameLayout>
+        app:layout_constraintVertical_bias="0.34">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

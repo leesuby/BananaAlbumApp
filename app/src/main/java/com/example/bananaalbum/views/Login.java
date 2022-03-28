@@ -32,24 +32,24 @@ public class Login extends AppCompatActivity {
         //startActivity(intent);
 
         //Button and Text
-        TextView Email = (TextView)findViewById(R.id.TextEmailAddress);
-        TextView Password = (TextView)findViewById(R.id.TextPassword);
-        Button SignIn = (Button)findViewById(R.id.ButtonSignIn);
-        Button Google = (Button)findViewById(R.id.ButtonGoogle);
-        Button Facebook = (Button)findViewById(R.id.ButtonFacebook);
-        TextView ForgorPassword = (TextView)findViewById(R.id.ButtonForgotPassword);
-        TextView SignUp = (TextView)findViewById(R.id.ButtonSignUp);
+        TextView Email = (TextView) findViewById(R.id.TextEmailAddress);
+        TextView Password = (TextView) findViewById(R.id.TextPassword);
+        Button SignIn = (Button) findViewById(R.id.ButtonSignIn);
+        Button Google = (Button) findViewById(R.id.ButtonGoogle);
+        Button Facebook = (Button) findViewById(R.id.ButtonFacebook);
+        TextView ForgorPassword = (TextView) findViewById(R.id.ButtonForgotPassword);
+        TextView SignUp = (TextView) findViewById(R.id.ButtonSignUp);
         //Action Sign in
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Email.getText().toString().equals("admin") && Password.getText().toString().equals("admin")){
+                if (Email.getText().toString().equals("admin") && Password.getText().toString().equals("admin")) {
                     Toast.makeText(getApplicationContext(),
-                            "Login Successfully",Toast.LENGTH_SHORT).show();
+                            "Login Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, MainScreen.class);
                     startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Wrong Email or Password",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_SHORT).show();
                 }
             }
 
