@@ -31,7 +31,7 @@ import java.util.Objects;
 public class CameraFragment extends Fragment {
     public static final String EXTRA_INFO = "default";
     private static final String appID = "bananaAlbum";
-    private Uri imageUri;
+
     private File createImageFile(){
         @SuppressLint("SimpleDateFormat")
         final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -52,31 +52,20 @@ public class CameraFragment extends Fragment {
         }
         final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         final File photoFile = createImageFile();
-        imageUri = Uri.fromFile(photoFile);
+        Uri imageUri = Uri.fromFile(photoFile);
         final  SharedPreferences myPrefs = requireActivity().getSharedPreferences(appID, 0);
         myPrefs.edit().putString("path", photoFile.getAbsolutePath()).apply();
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != MainActivity.RESULT_OK){
-            return;
-        }
-        if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            if(imageUri == null){
-                final SharedPreferences p = requireActivity().getSharedPreferences(appID, 0);
-                final String path = p.getString("path", "");
-                if(path.length() < 1){
-                    requireActivity().recreate();
-                }
-                imageUri = Uri.parse("file://" + path);
+        startActivity(takePictureIntent);
+        if(imageUri == null){
+            final SharedPreferences p = requireActivity().getSharedPreferences(appID, 0);
+            final String path = p.getString("path", "");
+            if(path.length() < 1){
+                requireActivity().recreate();
             }
-            requireActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE));
-        } else if(data == null){
-            requireActivity().recreate();
+            imageUri = Uri.parse("file://" + path);
         }
+        requireActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE));
+        return view;
     }
 }
