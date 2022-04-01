@@ -8,23 +8,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.bananaalbum.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainScreen extends AppCompatActivity {
 
     private RecyclerView rcvTest;
-    private Button btnAddUser;
-
 
 
     private boolean editMode = false;
@@ -77,6 +78,15 @@ public class MainScreen extends AppCompatActivity {
                 return true;
             }
         });
+        FloatingActionButton btnAddUser = findViewById(R.id.addAlbumbtn);
+        btnAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainScreen.this, EditPhoto.class);
+                startActivity(intent);
+            }
+        });
+
 
 //        rcvTest=findViewById(R.id.rcv_test);
 //        btnAddUser=findViewById(R.id.btnAdd);

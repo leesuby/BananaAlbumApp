@@ -3,11 +3,11 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_baseline_photo_album"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/pub"
         android:icon="@drawable/ic_baseline_public"
-        android:title="Public"/>
+        android:title="@string/pub"/>
 
     <item
         android:id="@+id/placeholder"
@@ -16,9 +16,9 @@
     <item
         android:id="@+id/camera"
         android:icon="@drawable/ic_baseline_photo_camera"
-        android:title="Camera"/>
+        android:title="@string/cam"/>
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_baseline_settings"
-        android:title="Setting"/>
+        android:title="@string/setting"/>
 </menu>

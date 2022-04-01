@@ -10,4 +10,8 @@
     <string name="btnSignUp">Sign Up</string>
     <string name="btnRegister">Register</string>
     <string name="btnName">Name</string>
+    <string name="home">Home</string>
+    <string name="pub">Public</string>
+    <string name="cam">Camera</string>
+    <string name="setting">Setting</string>
 </resources>
