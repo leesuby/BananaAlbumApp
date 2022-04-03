@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,9 @@ public class AlbumAdapter extends  RecyclerView.Adapter<AlbumAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int listImage[] = {R.drawable.test_ava2,R.drawable.test_ava3,R.drawable.test_ava4};
         holder.AlbumName.setText(listAlbum.get(position).getName());
+        holder.AlbumThumbnail.setImageResource(listImage[position % 3]);
     }
 
     @Override
@@ -51,11 +54,12 @@ public class AlbumAdapter extends  RecyclerView.Adapter<AlbumAdapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView AlbumName;
-
+        public ImageView AlbumThumbnail;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             AlbumName = itemView.findViewById(R.id.tv_albumName);
+            AlbumThumbnail = itemView.findViewById(R.id.im_AlbumThumbnail);
         }
     }
 
