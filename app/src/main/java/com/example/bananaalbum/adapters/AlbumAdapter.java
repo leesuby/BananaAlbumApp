@@ -13,14 +13,15 @@ import com.example.bananaalbum.R;
 import com.example.bananaalbum.model.Album;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AlbumAdapter extends  RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
 
-    ArrayList<Album> listAlbum = new ArrayList<>();
+    List<Album> listAlbum;
 
 
-    public AlbumAdapter(ArrayList<Album> listAlbum) {
+    public AlbumAdapter(List<Album> listAlbum) {
         this.listAlbum = listAlbum;
     }
 

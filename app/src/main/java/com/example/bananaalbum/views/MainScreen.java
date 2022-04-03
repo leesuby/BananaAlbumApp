@@ -3,6 +3,7 @@ package com.example.bananaalbum.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
@@ -24,14 +25,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bananaalbum.R;
+import com.example.bananaalbum.model.Album;
+import com.example.bananaalbum.viewmodels.AlbumViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainScreen extends AppCompatActivity {
 
-    private RecyclerView rcvTest;
-
+    private AlbumViewModel albumViewModel ;
 
     private boolean editMode = false;
 
@@ -119,9 +121,10 @@ public class MainScreen extends AppCompatActivity {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainScreen.this,
-                        name.getText().toString(),
-                        Toast.LENGTH_SHORT).show();
+                albumViewModel = new ViewModelProvider(MainScreen.this).get(AlbumViewModel.class);
+                albumViewModel.addAlbum(new Album(name.getText().toString()));
+                Toast.makeText(MainScreen.this,"Add Successfully",Toast.LENGTH_SHORT).show();
+                dg.dismiss();
             }
         });
 
