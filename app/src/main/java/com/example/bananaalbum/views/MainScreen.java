@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +20,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.bananaalbum.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -82,39 +87,48 @@ public class MainScreen extends AppCompatActivity {
         btnAddAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                openAddAlbumDialog();
 
             }
         });
-
-
-//        rcvTest=findViewById(R.id.rcv_test);
-//        btnAddUser=findViewById(R.id.btnAdd);
-//
-//        // set layout for RecyclerView
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        rcvTest.setLayoutManager(linearLayoutManager);
-//
-//        // set ViewModel with LiveData
-//        testViewModel = new ViewModelProvider(this).get(TestViewModel.class);
-//        testViewModel.getListTestLiveData().observe(this, new Observer<List<Test>>() {
-//            @Override
-//            public void onChanged(List<Test> tests) {
-//                //set Adapter for RecyclerView
-//                testAdapter= new TestAdapter(tests);
-//                rcvTest.setAdapter(testAdapter);
-//
-//            }
-//        });
-//
-//        //method for button add User
-//        btnAddUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Test t = new Test(R.drawable.ic_launcher_background,"Long","Dep trai lam");
-//                testViewModel.addTest(t);
-//            }
-//        });
     }
+
+    private void openAddAlbumDialog(){
+        final Dialog dg = new Dialog(this);
+        dg.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dg.setContentView(R.layout.dialog_addalbum);
+
+        Window window = dg.getWindow();
+        if(window==null){
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        EditText name = dg.findViewById(R.id.editText_AlbumName);
+        Button backBtn= dg.findViewById(R.id.btnBackAddAlbum),acceptBtn= dg.findViewById(R.id.btnAcceptAddAlbum);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dg.dismiss();
+            }
+        });
+
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainScreen.this,
+                        name.getText().toString(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dg.show();
+
+    }
+
 
     private static final int REQUEST_PERMISSIONS = 2461;
     private static final String[] PERMISSIONS = {
@@ -152,4 +166,33 @@ public class MainScreen extends AppCompatActivity {
             }
         }
     }
+
+
+    //        rcvTest=findViewById(R.id.rcv_test);
+//        btnAddUser=findViewById(R.id.btnAdd);
+//
+//        // set layout for RecyclerView
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        rcvTest.setLayoutManager(linearLayoutManager);
+//
+//        // set ViewModel with LiveData
+//        testViewModel = new ViewModelProvider(this).get(TestViewModel.class);
+//        testViewModel.getListTestLiveData().observe(this, new Observer<List<Test>>() {
+//            @Override
+//            public void onChanged(List<Test> tests) {
+//                //set Adapter for RecyclerView
+//                testAdapter= new TestAdapter(tests);
+//                rcvTest.setAdapter(testAdapter);
+//
+//            }
+//        });
+//
+//        //method for button add User
+//        btnAddUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Test t = new Test(R.drawable.ic_launcher_background,"Long","Dep trai lam");
+//                testViewModel.addTest(t);
+//            }
+//        });
 }
