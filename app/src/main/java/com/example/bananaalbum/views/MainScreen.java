@@ -78,12 +78,11 @@ public class MainScreen extends AppCompatActivity {
                 return true;
             }
         });
-        FloatingActionButton btnAddUser = findViewById(R.id.addAlbumbtn);
-        btnAddUser.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton btnAddAlbum = findViewById(R.id.addAlbumbtn);
+        btnAddAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainScreen.this, EditPhoto.class);
-                startActivity(intent);
+
             }
         });
 
