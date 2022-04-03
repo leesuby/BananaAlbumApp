@@ -55,10 +55,11 @@
         <entry key="..\:/Users/Admin/Documents/GitHub/BananaAlbumApp/app/src/main/res/layout/user_setting_screen.xml" value="0.176" />
         <entry key="..\:/Users/Admin/Documents/GitHub/BananaAlbumApp/app/src/main/res/menu/edit_tab_bar.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Admin/Documents/GitHub/BananaAlbumApp/app/src/main/res/menu/main_tab_bar.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/HOME/OneDrive - VNU-HCMUS/Documents/GitHub/BananaAlbumApp/app/src/main/res/layout/user_setting_screen.xml" value="0.14356884057971014" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
