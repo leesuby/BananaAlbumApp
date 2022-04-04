@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "608540510672",
+    "firebase_url": "https://bananamobile-7bb14-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bananamobile-7bb14",
+    "storage_bucket": "bananamobile-7bb14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608540510672:android:a782b60606cafda8bed1d5",
+        "android_client_info": {
+          "package_name": "com.example.bananaalbum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608540510672-tvk6nlp97vfkmjep1cn89892hi9c5mpv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bananaalbum",
+            "certificate_hash": "8198e1fce5cc0dbb4bd9b37b66a54d153706646b"
+          }
+        },
+        {
+          "client_id": "608540510672-lp7rb05rhhnntalosuueof9c6g0trtia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBazuDm25CEORrfGRDBmbAd6PE4aJe_42s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608540510672-lp7rb05rhhnntalosuueof9c6g0trtia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

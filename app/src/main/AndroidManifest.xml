@@ -33,6 +33,7 @@
         <activity android:name=".views.SignUp" />
         <activity android:name=".views.AddPhoto" />
         <activity android:name=".views.EditPhoto"/>
+        <activity android:name=".views.ViewAlbum"/>
     </application>
 
 </manifest>

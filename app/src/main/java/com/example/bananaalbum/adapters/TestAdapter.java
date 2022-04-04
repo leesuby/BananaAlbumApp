@@ -8,13 +8,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.bananaalbum.R;
 import com.example.bananaalbum.model.Test;
 
 import java.util.List;
 
 //Adapter for RecyclerView
-public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder>{
+public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder> {
     private List<Test> mlistTest;
 
     public TestAdapter(List<Test> mlistTest) {
@@ -24,14 +25,14 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
     @NonNull
     @Override
     public TestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemuser,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemuser, parent, false);
         return new TestViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TestViewHolder holder, int position) {
         Test test = mlistTest.get(position);
-        if(test== null){
+        if (test == null) {
             return;
         }
 
@@ -42,13 +43,13 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
 
     @Override
     public int getItemCount() {
-        if(mlistTest!= null){
+        if (mlistTest != null) {
             return mlistTest.size();
         }
         return 0;
     }
 
-    public class TestViewHolder extends RecyclerView.ViewHolder{
+    public class TestViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgAvatar;
         private TextView tvName;
@@ -56,9 +57,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
 
         public TestViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgAvatar= itemView.findViewById(R.id.img_avatar);
-            tvName= itemView.findViewById(R.id.tv_name);
-            tvDes= itemView.findViewById(R.id.tv_des);
+            imgAvatar = itemView.findViewById(R.id.img_avatar);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvDes = itemView.findViewById(R.id.tv_des);
         }
 
     }

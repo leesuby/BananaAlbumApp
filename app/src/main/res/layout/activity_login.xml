@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
->
+    >
 
     <EditText
         android:id="@+id/TextEmailAddress"
@@ -91,13 +91,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/custom_button_google"
         android:drawableLeft="@drawable/icon_google"
         android:drawablePadding="5dp"
         android:paddingHorizontal="20dp"
         android:text="@string/btnGoogle"
-        android:textSize="16dp"
         android:textColor="@color/grey"
-        android:background="@drawable/custom_button_google"
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/ButtonSignIn" />
 
@@ -107,12 +107,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="76dp"
-        android:drawableLeft="@drawable/icon_facebook"
         android:background="@drawable/custom_button_facebook"
+        android:drawableLeft="@drawable/icon_facebook"
         android:paddingHorizontal="20dp"
         android:text="@string/btnFacebook"
-        android:textSize="16dp"
         android:textColor="@color/white"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/ButtonSignIn" />
 
