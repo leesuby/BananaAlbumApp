@@ -32,7 +32,7 @@ public class AlbumViewModel extends ViewModel {
         return listAlbumLiveData;
     }
 
-    public void addAlbum(Album al){
+    public void addAlbum(Album al) {
         listAlbum.add(al);
         listAlbumLiveData.setValue(listAlbum);
     }

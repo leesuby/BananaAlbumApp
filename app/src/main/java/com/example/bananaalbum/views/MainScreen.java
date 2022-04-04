@@ -33,7 +33,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainScreen extends AppCompatActivity {
 
-    private AlbumViewModel albumViewModel ;
+    private AlbumViewModel albumViewModel;
 
     private boolean editMode = false;
 
@@ -57,7 +57,7 @@ public class MainScreen extends AppCompatActivity {
         BottomNavigationView navTab = findViewById(R.id.navBar);
 
         navTab.setBackground(null);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new HomeFragment()).commit();
 
 
         navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -66,7 +66,7 @@ public class MainScreen extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selected = null;
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
                         selected = new HomeFragment();
                         break;
@@ -80,7 +80,7 @@ public class MainScreen extends AppCompatActivity {
                         selected = new SettingFragment();
 
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab,selected).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, selected).commit();
 
                 return true;
             }
@@ -95,13 +95,13 @@ public class MainScreen extends AppCompatActivity {
         });
     }
 
-    private void openAddAlbumDialog(){
+    private void openAddAlbumDialog() {
         final Dialog dg = new Dialog(this);
         dg.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dg.setContentView(R.layout.dialog_addalbum);
 
         Window window = dg.getWindow();
-        if(window==null){
+        if (window == null) {
             return;
         }
 
@@ -109,7 +109,7 @@ public class MainScreen extends AppCompatActivity {
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         EditText name = dg.findViewById(R.id.editText_AlbumName);
-        Button backBtn= dg.findViewById(R.id.btnBackAddAlbum),acceptBtn= dg.findViewById(R.id.btnAcceptAddAlbum);
+        Button backBtn = dg.findViewById(R.id.btnBackAddAlbum), acceptBtn = dg.findViewById(R.id.btnAcceptAddAlbum);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +123,7 @@ public class MainScreen extends AppCompatActivity {
             public void onClick(View view) {
                 albumViewModel = new ViewModelProvider(MainScreen.this).get(AlbumViewModel.class);
                 albumViewModel.addAlbum(new Album(name.getText().toString()));
-                Toast.makeText(MainScreen.this,"Add Successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainScreen.this, "Add Successfully", Toast.LENGTH_SHORT).show();
                 dg.dismiss();
             }
         });
@@ -142,28 +142,30 @@ public class MainScreen extends AppCompatActivity {
     private static final int PERMISSIONS_COUNT = 2;
 
     @SuppressLint("NewApi")
-    private boolean notPermission(){
-        for(int i = 0; i < PERMISSIONS_COUNT; i++){
-            if(checkSelfPermission(PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED){
+    private boolean notPermission() {
+        for (int i = 0; i < PERMISSIONS_COUNT; i++) {
+            if (checkSelfPermission(PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED) {
                 return true;
             }
         }
         return false;
-    };
+    }
+
+    ;
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notPermission()){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notPermission()) {
             requestPermissions(PERMISSIONS, REQUEST_PERMISSIONS);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == REQUEST_PERMISSIONS  && grantResults.length > 0){
-            if(notPermission()){
+        if (requestCode == REQUEST_PERMISSIONS && grantResults.length > 0) {
+            if (notPermission()) {
                 ((ActivityManager) this.getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
                 recreate();
             }

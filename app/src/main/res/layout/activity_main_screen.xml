@@ -48,16 +48,16 @@
         android:id="@+id/fragment_navTab"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="56">
+        android:layout_weight="56"
+        android:orientation="horizontal">
 
     </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/AppBar"
@@ -65,15 +65,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:fabCradleMargin="15dp"
-            app:fabCradleRoundedCornerRadius="15dp"
-            >
+            app:fabCradleRoundedCornerRadius="15dp">
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/navBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:menu="@menu/main_tab_bar"
                 android:background="@android:color/transparent"
-                android:elevation="0dp"/>
+                android:elevation="0dp"
+                app:menu="@menu/main_tab_bar" />
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -84,7 +84,6 @@
             app:backgroundTint="@color/light_skin"
             app:layout_anchor="@id/AppBar"
             tools:ignore="SpeakableTextPresentCheck" />
-
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

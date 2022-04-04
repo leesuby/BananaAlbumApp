@@ -1,6 +1,8 @@
 package com.example.bananaalbum.model;
 
-public class Album {
+import java.io.Serializable;
+
+public class Album implements Serializable {
     private String name;
 
     public Album(String name) {

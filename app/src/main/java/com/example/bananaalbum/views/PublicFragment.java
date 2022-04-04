@@ -34,6 +34,7 @@ import java.util.Objects;
 public class PublicFragment extends Fragment {
 
     Button btnPic;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

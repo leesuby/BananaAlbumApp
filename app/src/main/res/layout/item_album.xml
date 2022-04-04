@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_album"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent">
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="15dp"
-            card_view:cardBackgroundColor="@color/skin"
-            >
-                <ImageView
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/im_AlbumThumbnail"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/ic_baseline_photo_album"
-                    android:layout_centerHorizontal="true"
-                    android:adjustViewBounds="true"
-                    />
 
-        </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@color/skin"
+        card_view:cardCornerRadius="15dp">
 
-        <TextView
-            android:id="@+id/tv_albumName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cardview"
-            android:text="Name"
-            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:id="@+id/im_AlbumThumbnail"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_baseline_photo_album" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_albumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardview"
+        android:layout_centerHorizontal="true"
+        android:text="Name" />
 
 </RelativeLayout>

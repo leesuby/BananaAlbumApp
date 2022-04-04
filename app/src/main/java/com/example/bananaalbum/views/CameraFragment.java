@@ -32,13 +32,13 @@ public class CameraFragment extends Fragment {
     public static final String EXTRA_INFO = "default";
     private static final String appID = "bananaAlbum";
 
-    private File createImageFile(){
-        @SuppressLint("SimpleDateFormat")
-        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    private File createImageFile() {
+        @SuppressLint("SimpleDateFormat") final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         final String imageFileName = "/JPEG_" + timeStamp + ".jpg";
         final File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         return new File(storageDir + imageFileName);
     }
+
     private static final int REQUEST_IMAGE_CAPTURE = 1208;
 
 
@@ -46,21 +46,21 @@ public class CameraFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
         final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         final File photoFile = createImageFile();
         Uri imageUri = Uri.fromFile(photoFile);
-        final  SharedPreferences myPrefs = requireActivity().getSharedPreferences(appID, 0);
+        final SharedPreferences myPrefs = requireActivity().getSharedPreferences(appID, 0);
         myPrefs.edit().putString("path", photoFile.getAbsolutePath()).apply();
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivity(takePictureIntent);
-        if(imageUri == null){
+        if (imageUri == null) {
             final SharedPreferences p = requireActivity().getSharedPreferences(appID, 0);
             final String path = p.getString("path", "");
-            if(path.length() < 1){
+            if (path.length() < 1) {
                 requireActivity().recreate();
             }
             imageUri = Uri.parse("file://" + path);

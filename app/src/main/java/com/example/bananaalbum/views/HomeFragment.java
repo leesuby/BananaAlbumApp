@@ -27,20 +27,21 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     RecyclerView AlbumRecView;
-    Button FavBtn,BinBtn;
+    Button FavBtn, BinBtn;
     EditText SearchBar;
     AlbumViewModel albumViewModel;
+    AlbumAdapter albumAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View homeFrag =  inflater.inflate(R.layout.fragment_home,container,false);
+        View homeFrag = inflater.inflate(R.layout.fragment_home, container, false);
 
-        FavBtn= homeFrag.findViewById(R.id.btnFav);
-        BinBtn= homeFrag.findViewById(R.id.btnBin);
-        SearchBar= homeFrag.findViewById(R.id.search_field);
-        AlbumRecView= homeFrag.findViewById(R.id.AlbumRecView);
+        FavBtn = homeFrag.findViewById(R.id.btnFav);
+        BinBtn = homeFrag.findViewById(R.id.btnBin);
+        SearchBar = homeFrag.findViewById(R.id.search_field);
+        AlbumRecView = homeFrag.findViewById(R.id.AlbumRecView);
 
 
         albumViewModel = new ViewModelProvider(this.getActivity()).get(AlbumViewModel.class);
@@ -48,14 +49,22 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Album> albums) {
                 //set Adapter for RecyclerView
-                AlbumAdapter albumAdapter = new AlbumAdapter(albums);
+                albumAdapter = new AlbumAdapter(albums, HomeFragment.this.getActivity());
                 AlbumRecView.setAdapter(albumAdapter);
 
             }
         });
 
-        AlbumRecView.setLayoutManager(new GridLayoutManager(this.getActivity(),2));
+        AlbumRecView.setLayoutManager(new GridLayoutManager(this.getActivity(), 2));
         return homeFrag;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (albumAdapter != null) {
+            albumAdapter.release();
+        }
     }
 }
 
