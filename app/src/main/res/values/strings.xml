@@ -14,4 +14,6 @@
     <string name="pub">Public</string>
     <string name="cam">Camera</string>
     <string name="setting">Setting</string>
+    <string name="grayscale">Grayscale</string>
+    <string name="rotate">Rotate</string>
 </resources>

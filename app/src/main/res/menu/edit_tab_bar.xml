@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/grayscale"
         android:icon="@drawable/ic_baseline_photo_album"
-        android:title="@string/home" />
+        android:title="@string/grayscale" />
     <item
-        android:id="@+id/placeholder1"
-        android:enabled="false"
-        android:title="" />
+        android:id="@+id/rotate"
+        android:icon="@drawable/ic_baseline_public"
+        android:title="@string/rotate"/>
     <item
         android:id="@+id/placeholder2"
         android:enabled="false"

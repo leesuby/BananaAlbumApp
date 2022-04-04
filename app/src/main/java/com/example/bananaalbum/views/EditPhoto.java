@@ -40,7 +40,7 @@ public class EditPhoto extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-                switch (item.getItemId()) {
+                switch (item.getItemId()){
                     case R.id.home:
                         ImageView imageView = findViewById(R.id.imageView5);
                         ColorMatrix matrix = new ColorMatrix();
