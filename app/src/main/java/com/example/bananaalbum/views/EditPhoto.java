@@ -5,12 +5,17 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -28,10 +33,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class EditPhoto extends AppCompatActivity {
     private float angle = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,23 +66,85 @@ public class EditPhoto extends AppCompatActivity {
             @SuppressLint({"QueryPermissionsNeeded", "NonConstantResourceId"})
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 ImageView imageView = findViewById(R.id.imageView5);
+                imageView.invalidate();
+                BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
                 switch (item.getItemId()){
 
                     case R.id.grayscale:
-                        ColorMatrix matrix = new ColorMatrix();
-                        matrix.setSaturation(0);
-                        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-                        imageView.setColorFilter(filter);
+                        Bitmap grayscale = toGrayscale(bitmap);
+                        imageView.setImageBitmap(grayscale);
                         break;
                     case R.id.rotate:
-                        angle = angle + 90;
-                        imageView.setRotation(angle);
-                        System.out.println(angle);
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(90);
+                        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        imageView.setImageBitmap(rotatedBitmap);
                 }
                 return true;
             }
         });
+
+        FloatingActionButton btnAddAlbum = findViewById(R.id.savePhoto);
+        btnAddAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView imageView = findViewById(R.id.imageView5);
+                BitmapDrawable draw = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap = draw.getBitmap();
+                FileOutputStream outStream = null;
+                File outFile = createImageFile();
+                try {
+                    outStream = new FileOutputStream(outFile);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+                try {
+                    assert outStream != null;
+                    outStream.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    outStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                intent.setData(Uri.fromFile(outFile));
+                sendBroadcast(intent);
+            }
+        });
+    }
+
+    private File createImageFile() {
+        @SuppressLint("SimpleDateFormat") final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        final String imageFileName = "/JPEG_" + timeStamp + ".jpg";
+        final File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        return new File(storageDir + imageFileName);
+    }
+
+    public Bitmap toGrayscale(Bitmap bmpOriginal) {
+        Bitmap bmpGrayscale = Bitmap.createBitmap(bmpOriginal.getWidth(),bmpOriginal.getHeight(), bmpOriginal.getConfig());
+        double red = 0.33;
+        double green = 0.59;
+        double blue = 0.11;
+
+        for (int i = 0; i < bmpOriginal.getWidth(); i++) {
+            for (int j = 0; j < bmpOriginal.getHeight(); j++) {
+                int p = bmpOriginal.getPixel(i, j);
+                int r = Color.red(p);
+                int g = Color.green(p);
+                int b = Color.blue(p);
+                int gray = (int) ((r + g + b) /3);
+                r = gray;
+                g = gray;
+                b = gray;
+                bmpGrayscale.setPixel(i, j, Color.argb(Color.alpha(p), r, g, b));
+            }
+        }
+        return bmpGrayscale;
     }
 }

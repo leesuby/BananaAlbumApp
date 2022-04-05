@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class CameraFragment extends Fragment {
-    public static final String EXTRA_INFO = "default";
     private static final String appID = "bananaAlbum";
 
     private File createImageFile() {
@@ -38,9 +37,6 @@ public class CameraFragment extends Fragment {
         final File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         return new File(storageDir + imageFileName);
     }
-
-    private static final int REQUEST_IMAGE_CAPTURE = 1208;
-
 
     @Nullable
     @Override
