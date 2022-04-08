@@ -15,5 +15,7 @@
     <string name="cam">Camera</string>
     <string name="setting">Setting</string>
     <string name="grayscale">Grayscale</string>
-    <string name="rotate">Rotate</string>
+    <string name="rotateLeft">Rotate Left</string>
+    <string name="rotateRight">Rotate Right</string>
+    <string name="flip">Flip</string>
 </resources>

@@ -42,7 +42,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class EditPhoto extends AppCompatActivity {
-    private float angle = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,18 +69,27 @@ public class EditPhoto extends AppCompatActivity {
                 imageView.invalidate();
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
+                Bitmap fixedBitmap = null;
+                Matrix matrix = new Matrix();
                 switch (item.getItemId()){
-
                     case R.id.grayscale:
-                        Bitmap grayscale = toGrayscale(bitmap);
-                        imageView.setImageBitmap(grayscale);
+                        fixedBitmap = toGrayscale(bitmap);
                         break;
-                    case R.id.rotate:
-                        Matrix matrix = new Matrix();
+                    case R.id.rotateLeft:
                         matrix.postRotate(90);
-                        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                        imageView.setImageBitmap(rotatedBitmap);
+                        fixedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        break;
+                    case R.id.rotateRight:
+                        matrix.postRotate(270);
+                        fixedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        break;
+                    case R.id.flip:
+                        matrix.setScale(-1, 1);
+                        fixedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        break;
+
                 }
+                imageView.setImageBitmap(fixedBitmap);
                 return true;
             }
         });

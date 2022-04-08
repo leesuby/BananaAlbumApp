@@ -5,12 +5,22 @@
         android:icon="@drawable/ic_baseline_photo_album"
         android:title="@string/grayscale" />
     <item
+        android:id="@+id/flip"
+        android:icon="@drawable/ic_baseline_photo_album"
+        android:title="@string/flip" />
+    <item
         android:id="@+id/placeholder1"
         android:enabled="false"
         android:title="" />
     <item
-        android:id="@+id/rotate"
+        android:id="@+id/rotateLeft"
         android:icon="@drawable/ic_baseline_public"
-        android:title="@string/rotate"/>
+        android:title="@string/rotateLeft"/>
+
+    <item
+        android:id="@+id/rotateRight"
+        android:icon="@drawable/ic_baseline_public"
+        android:title="@string/rotateRight"/>
+
 
 </menu>
