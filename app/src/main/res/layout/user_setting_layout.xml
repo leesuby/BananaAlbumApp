@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/light_grey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="55dp"
+        android:background="@drawable/bg_gradient_lightyello_lightpink">
 
         <TextView
             android:id="@+id/textView3"
@@ -25,19 +27,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="151dp">
+        android:layout_height="151dp"
+
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+
+        android:background="@drawable/custom_button_login"
+        >
 
         <view
             android:id="@+id/view"
             class="de.hdodenhof.circleimageview.CircleImageView"
-            android:layout_width="55dp"
-            android:layout_height="45dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/test_ava"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.173" />
+            app:layout_constraintVertical_bias="0.175" />
 
         <TextView
             android:id="@+id/textView5"
@@ -90,37 +100,36 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="44dp"
+
+
+            android:layout_marginTop="40dp"
+            android:src="@drawable/camera"
             app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_baseline_photo_camera" />
+            app:layout_constraintTop_toTopOf="@+id/view" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="24dp"
             android:layout_height="19dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            android:src="@drawable/edit"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.814"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:layout_constraintVertical_bias="0.121" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -160,8 +169,8 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-
-            android:background="@color/black" />
+            android:layout_marginLeft="40dp"
+            android:background="@color/grey" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -172,7 +181,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="8dp"
-                android:src="@drawable/browser" />
+                android:src="@drawable/saved" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -200,14 +209,14 @@
 
 
     </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/white">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -217,7 +226,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="8dp"
-                android:src="@drawable/browser" />
+                android:src="@drawable/acc" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -234,8 +243,8 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-
-            android:background="@color/black" />
+            android:layout_marginLeft="40dp"
+            android:background="@color/grey" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -272,9 +281,8 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:background="@color/black" />
+
+            android:background="@color/grey" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -306,14 +314,16 @@
             </RelativeLayout>
 
         </LinearLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+    </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -324,14 +334,14 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="8dp"
-                    android:src="@drawable/browser" />
+                    android:src="@drawable/security" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:layout_marginVertical="10dp"
-                    android:text="Service"
+                    android:text="Security"
                     android:textAlignment="textStart"
                     android:textAllCaps="false" />
 
@@ -340,8 +350,8 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-
-                android:background="@color/black" />
+                android:layout_marginLeft="40dp"
+                android:background="@color/grey" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -375,14 +385,13 @@
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <LinearLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="10dp"
+        android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -393,37 +402,24 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="8dp"
-                    android:src="@drawable/browser" />
+                    android:src="@drawable/logout" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:layout_marginVertical="10dp"
-                    android:text="See your public album"
+                    android:text="Logout"
                     android:textAlignment="textStart"
                     android:textAllCaps="false" />
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentRight="true"
-                        android:padding="12dp"
-                        android:src="@drawable/next" />
-
-                </RelativeLayout>
 
             </LinearLayout>
 
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-
-                android:background="@color/black" />
+                android:layout_marginLeft="40dp"
+                android:background="@color/grey" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -433,30 +429,17 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:padding="8dp"
-                    android:src="@drawable/browser" />
+                    android:padding="5dp"
+                    android:src="@drawable/delete_acc" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:layout_marginVertical="10dp"
-                    android:text="See your public album"
+                    android:text="Delete account"
                     android:textAlignment="textStart"
                     android:textAllCaps="false" />
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentRight="true"
-                        android:padding="12dp"
-                        android:src="@drawable/next" />
-
-                </RelativeLayout>
 
             </LinearLayout>
 
@@ -466,4 +449,3 @@
 
     </LinearLayout>
 
-</LinearLayout>

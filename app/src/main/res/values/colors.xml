@@ -23,4 +23,5 @@
     <color name="pink">#F10086</color>
     <color name="grey">#D1D1D1</color>
     <color name="dark_grey">#8D8DAA</color>
+    <color name="light_grey">#F2F3F5</color>
 </resources>
