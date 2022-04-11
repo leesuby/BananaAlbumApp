@@ -9,9 +9,12 @@ import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +23,8 @@ import com.example.bananaalbum.adapters.PictureAdapter;
 import com.example.bananaalbum.adapters.PictureRecylerAdapter;
 import com.example.bananaalbum.model.Album;
 import com.example.bananaalbum.model.Picture;
+import com.example.bananaalbum.viewmodels.AlbumViewModel;
+import com.example.bananaalbum.viewmodels.PictureViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,9 +36,9 @@ public class ViewAlbum extends AppCompatActivity {
     RecyclerView rcvPic;
     ImageButton backBtn;
     FloatingActionButton floatingActionButton;
+    PictureViewModel viewModel;
 
-    String[] name = {"1", "2", "3", "4", "5"};
-    int[] picture = {R.drawable.test_ava, R.drawable.test_ava2, R.drawable.test_ava3, R.drawable.test_ava4, R.drawable.app_name2};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,31 +70,44 @@ public class ViewAlbum extends AppCompatActivity {
 
         AlbumName.setText(a.getName());
 
-        PictureRecylerAdapter adapter = new PictureRecylerAdapter();
 
-        List<Picture> list = new ArrayList<>();
+        // ViewModel for RecylerView Picture
+        viewModel = new ViewModelProvider(this).get(PictureViewModel.class);
+        viewModel.getListPictureLiveData().observe(this, new Observer<List<Picture>>() {
+            @Override
+            public void onChanged(List<Picture> pictures) {
+                PictureRecylerAdapter adapter = new PictureRecylerAdapter();
+                adapter.setData(pictures, ViewAlbum.this);
+                rcvPic.setAdapter(adapter);
 
-        for(int i = 0;i<25;i++){
-            list.add(new Picture(picture[i % 5]));
-        }
+            }
+        });
 
-        adapter.setData(list,this);
-        rcvPic.setAdapter(adapter);
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,4);
-
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         rcvPic.setLayoutManager(gridLayoutManager);
-
         rcvPic.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if( dy > 0){
+                if (dy > 0) {
                     floatingActionButton.hide();
-                }else
+                } else
                     floatingActionButton.show();
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel = new ViewModelProvider(ViewAlbum.this).get(PictureViewModel.class);
+                viewModel.addPicture(new Picture(R.drawable.test_ava4));
+                Toast.makeText(ViewAlbum.this, "Add Successfully", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -32,6 +32,7 @@ public class SettingFragment extends Fragment {
     GoogleSignInAccount account;
     GoogleSignInClient mGoogleSignInClient;
     Context con;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

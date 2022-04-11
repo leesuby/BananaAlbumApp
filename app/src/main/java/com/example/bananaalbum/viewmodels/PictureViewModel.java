@@ -1,0 +1,44 @@
+package com.example.bananaalbum.viewmodels;
+
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+import com.example.bananaalbum.R;
+import com.example.bananaalbum.model.Picture;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PictureViewModel extends ViewModel {
+    private final MutableLiveData<List<Picture>> listPictureLiveData;
+    private List<Picture> listPicture;
+
+    String[] name = {"1", "2", "3", "4", "5"};
+    int[] picture = {R.drawable.test_ava, R.drawable.test_ava2, R.drawable.test_ava3, R.drawable.test_ava4, R.drawable.app_name2};
+
+    public PictureViewModel() {
+        this.listPictureLiveData = new MutableLiveData<>();
+        initData();
+    }
+
+
+
+
+    public void initData(){
+        this.listPicture = new ArrayList<>();
+        for (int i = 0; i < 25; i++) {
+            listPicture.add(new Picture(picture[i % 5]));
+        }
+
+        listPictureLiveData.setValue(listPicture);
+    }
+
+    public MutableLiveData<List<Picture>> getListPictureLiveData() {
+        return listPictureLiveData;
+    }
+
+    public void addPicture(Picture picture){
+        listPicture.add(picture);
+        listPictureLiveData.setValue(listPicture);
+    }
+}
