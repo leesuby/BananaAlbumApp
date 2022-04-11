@@ -29,6 +29,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.bananaalbum.R;
+import com.example.bananaalbum.model.Album;
+import com.example.bananaalbum.model.Picture;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
@@ -43,6 +45,7 @@ import java.util.Objects;
 
 public class EditPhoto extends AppCompatActivity {
 
+    private ImageView imageView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,18 @@ public class EditPhoto extends AppCompatActivity {
 
         setContentView(R.layout.activity_edit);
 
+        //get data from fragment
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+        Picture p = (Picture) bundle.get("picture");
+
+
+        imageView = findViewById(R.id.imageView5);
+        imageView.setImageResource(p.getResourceId());
+
+
         BottomNavigationView navTab = findViewById(R.id.navBar1);
         navTab.setBackground(null);
 
@@ -65,7 +80,7 @@ public class EditPhoto extends AppCompatActivity {
             @SuppressLint({"QueryPermissionsNeeded", "NonConstantResourceId"})
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                ImageView imageView = findViewById(R.id.imageView5);
+
                 imageView.invalidate();
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();

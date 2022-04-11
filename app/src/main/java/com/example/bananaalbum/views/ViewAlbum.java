@@ -10,16 +10,28 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bananaalbum.R;
 import com.example.bananaalbum.adapters.PictureAdapter;
+import com.example.bananaalbum.adapters.PictureRecylerAdapter;
 import com.example.bananaalbum.model.Album;
+import com.example.bananaalbum.model.Picture;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewAlbum extends AppCompatActivity {
     TextView AlbumName;
     GridView gridPic;
+    RecyclerView rcvPic;
     ImageButton backBtn;
+    FloatingActionButton floatingActionButton;
+
     String[] name = {"1", "2", "3", "4", "5"};
     int[] picture = {R.drawable.test_ava, R.drawable.test_ava2, R.drawable.test_ava3, R.drawable.test_ava4, R.drawable.app_name2};
 
@@ -47,14 +59,37 @@ public class ViewAlbum extends AppCompatActivity {
 
         //get widget
         AlbumName = findViewById(R.id.tv_albumNameOnAlbum);
-        gridPic = findViewById(R.id.gv_picture);
+        rcvPic = findViewById(R.id.rcv_picture);
         backBtn = findViewById(R.id.btn_backAlbum);
+        floatingActionButton = findViewById(R.id.flbtn_album);
 
         AlbumName.setText(a.getName());
 
-        PictureAdapter adapter = new PictureAdapter(this, R.layout.item_picture, name, picture);
-        gridPic.setAdapter(adapter);
+        PictureRecylerAdapter adapter = new PictureRecylerAdapter();
 
+        List<Picture> list = new ArrayList<>();
+
+        for(int i = 0;i<25;i++){
+            list.add(new Picture(picture[i % 5]));
+        }
+
+        adapter.setData(list,this);
+        rcvPic.setAdapter(adapter);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,4);
+
+        rcvPic.setLayoutManager(gridLayoutManager);
+
+        rcvPic.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if( dy > 0){
+                    floatingActionButton.hide();
+                }else
+                    floatingActionButton.show();
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
