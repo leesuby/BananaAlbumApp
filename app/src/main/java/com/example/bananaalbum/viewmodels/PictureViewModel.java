@@ -12,6 +12,7 @@ import java.util.List;
 public class PictureViewModel extends ViewModel {
     private final MutableLiveData<List<Picture>> listPictureLiveData;
     private List<Picture> listPicture;
+    private boolean isEditMode = false;
 
     String[] name = {"1", "2", "3", "4", "5"};
     int[] picture = {R.drawable.test_ava, R.drawable.test_ava2, R.drawable.test_ava3, R.drawable.test_ava4, R.drawable.app_name2};
@@ -20,8 +21,6 @@ public class PictureViewModel extends ViewModel {
         this.listPictureLiveData = new MutableLiveData<>();
         initData();
     }
-
-
 
 
     public void initData(){
@@ -41,4 +40,40 @@ public class PictureViewModel extends ViewModel {
         listPicture.add(picture);
         listPictureLiveData.setValue(listPicture);
     }
+
+    public void editMode(boolean mode){
+        for(int i=0;i<listPicture.size();i++){
+            listPicture.get(i).setEditMode(mode);
+        }
+        listPictureLiveData.setValue(listPicture);
+    }
+
+    public boolean IsDeletePicture(){
+        int i,flag;
+        for(i=0;i<listPicture.size();i++){
+            if(listPicture.get(i).isChoosen())
+            {
+                flag=1;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deletePicture(){
+        int numRemove=0;
+        int i;
+        for(i = 0; i<listPicture.size()-numRemove; i++){
+            if(listPicture.get(i).isChoosen())
+            {
+                listPicture.remove(i);
+                numRemove++;
+                i--;
+            }
+        }
+        listPictureLiveData.setValue(listPicture);
+
+    }
+
+
 }

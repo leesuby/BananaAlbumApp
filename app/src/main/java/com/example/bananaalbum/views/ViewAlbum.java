@@ -1,11 +1,16 @@
 package com.example.bananaalbum.views;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,10 +37,9 @@ import java.util.List;
 
 public class ViewAlbum extends AppCompatActivity {
     TextView AlbumName;
-    GridView gridPic;
     RecyclerView rcvPic;
-    ImageButton backBtn;
-    FloatingActionButton floatingActionButton;
+    ImageButton backBtn,editBtn,infoBtn,exitEditBtn;
+    FloatingActionButton floatingAddActionButton,floatingDeleteActionButton;
     PictureViewModel viewModel;
 
 
@@ -66,7 +70,11 @@ public class ViewAlbum extends AppCompatActivity {
         AlbumName = findViewById(R.id.tv_albumNameOnAlbum);
         rcvPic = findViewById(R.id.rcv_picture);
         backBtn = findViewById(R.id.btn_backAlbum);
-        floatingActionButton = findViewById(R.id.flbtn_album);
+        editBtn = findViewById(R.id.btn_editAlbum);
+        infoBtn = findViewById(R.id.btn_infoAlbum);
+        exitEditBtn = findViewById(R.id.btn_exitEditAlbum);
+        floatingAddActionButton = findViewById(R.id.flbtnAdd_album);
+        floatingDeleteActionButton = findViewById(R.id.flbtnDelete_album);
 
         AlbumName.setText(a.getName());
 
@@ -77,9 +85,11 @@ public class ViewAlbum extends AppCompatActivity {
             @Override
             public void onChanged(List<Picture> pictures) {
                 PictureRecylerAdapter adapter = new PictureRecylerAdapter();
-                adapter.setData(pictures, ViewAlbum.this);
+                if(pictures.get(0).isEditMode()==true)
+                    adapter.setData(pictures, ViewAlbum.this,true);
+                else
+                    adapter.setData(pictures, ViewAlbum.this,false);
                 rcvPic.setAdapter(adapter);
-
             }
         });
 
@@ -89,24 +99,33 @@ public class ViewAlbum extends AppCompatActivity {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0) {
-                    floatingActionButton.hide();
+                    floatingAddActionButton.hide();
                 } else
-                    floatingActionButton.show();
+                    floatingAddActionButton.show();
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        floatingAddActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel = new ViewModelProvider(ViewAlbum.this).get(PictureViewModel.class);
                 viewModel.addPicture(new Picture(R.drawable.test_ava4));
                 Toast.makeText(ViewAlbum.this, "Add Successfully", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+        floatingDeleteActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(viewModel.IsDeletePicture()==true)
+                    openConfirmDialog();
+                else
+                    Toast.makeText(ViewAlbum.this, "Please choose image you want to delete", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +133,70 @@ public class ViewAlbum extends AppCompatActivity {
                 finish();
             }
         });
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.editMode(true);
+
+                floatingAddActionButton.setVisibility(View.GONE);
+                infoBtn.setVisibility(View.GONE);
+                editBtn.setVisibility(View.GONE);
+
+                exitEditBtn.setVisibility(View.VISIBLE);
+                floatingDeleteActionButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        exitEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.editMode(false);
+
+                floatingAddActionButton.setVisibility(View.VISIBLE);
+                infoBtn.setVisibility(View.VISIBLE);
+                editBtn.setVisibility(View.VISIBLE);
+
+                exitEditBtn.setVisibility(View.GONE);
+                floatingDeleteActionButton.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+    private void openConfirmDialog() {
+        final Dialog dg = new Dialog(this);
+        dg.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dg.setContentView(R.layout.dialog_confirm_deletepicture);
+
+        Window window = dg.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        Button backBtn = dg.findViewById(R.id.btnBackConfirmDelete), acceptBtn = dg.findViewById(R.id.btnAcceptConfirmDelete);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dg.dismiss();
+            }
+        });
+
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.deletePicture();
+                Toast.makeText(ViewAlbum.this, "Delete Successfully", Toast.LENGTH_SHORT).show();
+                dg.dismiss();
+            }
+        });
+
+        dg.show();
 
     }
 }

@@ -2,14 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_picture"
     android:layout_width="wrap_content"
-    android:layout_height="150dp">
+    android:layout_height="100dp">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/isChoosenBtn"
+        android:layout_margin="5dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:backgroundTint="@color/crimson"
+        android:visibility="gone"
+        />
 
     <ImageView
-        android:layout_marginRight="2dp"
         android:id="@+id/img_img"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
         android:scaleType="fitXY"
-        android:src="@drawable/appname"/>
+        android:src="@drawable/appname" />
+
 
 </RelativeLayout>

@@ -17,6 +17,7 @@ import com.example.bananaalbum.R;
 import com.example.bananaalbum.model.Picture;
 import com.example.bananaalbum.views.EditPhoto;
 import com.example.bananaalbum.views.ViewAlbum;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -24,11 +25,13 @@ public class PictureRecylerAdapter extends RecyclerView.Adapter<PictureRecylerAd
 
 
     private List<Picture> mListImage;
+    private boolean iseditMode;
     private Context con;
 
-    public void setData(List<Picture> list,Context con){
+    public void setData(List<Picture> list,Context con,boolean iseditMode){
         this.mListImage=list;
         this.con=con;
+        this.iseditMode=iseditMode;
         notifyDataSetChanged();
     }
 
@@ -46,14 +49,17 @@ public class PictureRecylerAdapter extends RecyclerView.Adapter<PictureRecylerAd
         if (picture == null){
             return;
         }
-
         holder.img.setImageResource(picture.getResourceId());
 
         //event click listener for every picture
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickDetailPicture(picture);
+
+                if (iseditMode==false)
+                    onClickDetailPicture(picture);
+                else
+                    onClickEditPicture(holder,picture);
             }
         });
 
@@ -67,6 +73,18 @@ public class PictureRecylerAdapter extends RecyclerView.Adapter<PictureRecylerAd
         con.startActivity(i);
     }
 
+    public void onClickEditPicture(PictureViewHolder holder,Picture p){
+        if(p.isChoosen() == false)
+        {
+            holder.isChooseBtn.setVisibility(View.VISIBLE);
+            p.setChoosen(true);
+        }
+        else{
+            holder.isChooseBtn.setVisibility(View.GONE);
+            p.setChoosen(false);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return this.mListImage != null ? mListImage.size() : 0;
@@ -76,11 +94,13 @@ public class PictureRecylerAdapter extends RecyclerView.Adapter<PictureRecylerAd
 
         private ImageView img;
         private RelativeLayout layout;
+        private FloatingActionButton isChooseBtn;
 
         public PictureViewHolder(@NonNull View itemView) {
             super(itemView);
             this.img = itemView.findViewById(R.id.img_img);
             this.layout= itemView.findViewById(R.id.item_picture);
+            this.isChooseBtn= itemView.findViewById(R.id.isChoosenBtn);
         }
     }
 }
