@@ -47,7 +47,6 @@ public class Login extends AppCompatActivity {
         TextView Password = (TextView) findViewById(R.id.TextPassword);
         Button SignIn = (Button) findViewById(R.id.ButtonSignIn);
         Button Google = (Button) findViewById(R.id.ButtonGoogle);
-        Button Facebook = (Button) findViewById(R.id.ButtonFacebook);
         TextView ForgotPassword = (TextView) findViewById(R.id.ButtonForgotPassword);
         TextView SignUp = (TextView) findViewById(R.id.ButtonSignUp);
         //Action Sign in
@@ -111,13 +110,22 @@ public class Login extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Toast.makeText(this, "Sign-in Successfully",Toast.LENGTH_SHORT).show();
-            ToMainScreen(account);
+            ToMainScreen();
         } catch (ApiException e) {
             Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
         }
     }
-    private void ToMainScreen(GoogleSignInAccount account){
+    private void ToMainScreen(){
         Intent intent = new Intent(this, MainScreen.class);
         startActivity(intent);
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            Toast.makeText(this,"User Already Signed-in",Toast.LENGTH_SHORT).show();
+            ToMainScreen();
+        }
     }
 }

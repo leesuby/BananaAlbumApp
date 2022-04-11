@@ -14,8 +14,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -27,9 +29,17 @@ import android.widget.Toast;
 import com.example.bananaalbum.R;
 import com.example.bananaalbum.model.Album;
 import com.example.bananaalbum.viewmodels.AlbumViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.concurrent.Executor;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -39,6 +49,8 @@ public class MainScreen extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1208;
 
+    public GoogleSignInAccount account;
+    public GoogleSignInClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,14 +70,25 @@ public class MainScreen extends AppCompatActivity {
 
         navTab.setBackground(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new HomeFragment()).commit();
-
-
+        // Account information from google
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        client = GoogleSignIn.getClient(this, gso);
+        if (account != null) {
+            String personName = account.getDisplayName();
+            String personGivenName = account.getGivenName();
+            String personFamilyName = account.getFamilyName();
+            String personEmail = account.getEmail();
+            String personId = account.getId();
+            Uri personPhoto = account.getPhotoUrl();
+        }
         navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("QueryPermissionsNeeded")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selected = null;
-
                 switch (item.getItemId()) {
                     case R.id.home:
                         selected = new HomeFragment();
@@ -78,10 +101,8 @@ public class MainScreen extends AppCompatActivity {
                         break;
                     case R.id.setting:
                         selected = new SettingFragment();
-
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, selected).commit();
-
                 return true;
             }
         });
@@ -169,6 +190,20 @@ public class MainScreen extends AppCompatActivity {
                 ((ActivityManager) this.getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
                 recreate();
             }
+        }
+    }
+
+    public void signOut() {
+        if(account!=null){
+            client.signOut()
+                    .addOnCompleteListener( this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            //Toast.makeText(SettingFragment.this.con, "Sign-out Successfully",Toast.LENGTH_SHORT).show();
+                            Intent intent= new Intent(MainScreen.this,Login.class);
+                            startActivity(intent);
+                        }
+                    });
         }
     }
 

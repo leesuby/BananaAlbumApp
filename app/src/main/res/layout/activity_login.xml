@@ -89,31 +89,16 @@
         android:id="@+id/ButtonGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="88dp"
         android:background="@drawable/custom_button_google"
         android:drawableLeft="@drawable/icon_google"
         android:drawablePadding="5dp"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="30dp"
         android:text="@string/btnGoogle"
-        android:textColor="@color/grey"
+        android:textColor="@color/black"
         android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonSignIn" />
-
-    <Button
-        android:id="@+id/ButtonFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/custom_button_facebook"
-        android:drawableLeft="@drawable/icon_facebook"
-        android:paddingHorizontal="20dp"
-        android:text="@string/btnFacebook"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ButtonSignIn" />
 
     <androidx.constraintlayout.widget.Guideline
