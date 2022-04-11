@@ -63,11 +63,10 @@ public class PictureViewModel extends ViewModel {
     public void deletePicture(){
         int numRemove=0;
         int i;
-        for(i = 0; i<listPicture.size()-numRemove; i++){
+        for(i = 0; i<listPicture.size(); i++){
             if(listPicture.get(i).isChoosen())
             {
                 listPicture.remove(i);
-                numRemove++;
                 i--;
             }
         }
