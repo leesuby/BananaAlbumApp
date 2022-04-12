@@ -2,6 +2,7 @@ package com.example.bananaalbum.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.bananaalbum.R;
@@ -68,6 +71,9 @@ public class MainScreen extends AppCompatActivity {
 
         BottomNavigationView navTab = findViewById(R.id.navBar);
 
+        ConstraintLayout topbar=findViewById(R.id.topbar);
+        FrameLayout fr = findViewById(R.id.fragment_navTab);
+
         navTab.setBackground(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new HomeFragment()).commit();
         // Account information from google
@@ -91,16 +97,73 @@ public class MainScreen extends AppCompatActivity {
                 Fragment selected = null;
                 switch (item.getItemId()) {
                     case R.id.home:
+                    {
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+                        params.weight = 6.0f;
+                        topbar.setLayoutParams(params);
+                        topbar.setVisibility(View.VISIBLE);
+                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+                        FrameLayout fr = findViewById(R.id.fragment_navTab);
+
+                        params1.weight=56.0f;
+                        fr.setLayoutParams(params1);
                         selected = new HomeFragment();
                         break;
+                    }
                     case R.id.pub:
-                        selected = new PublicFragment();
+                    {
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+                        params.weight = 6.0f;
+                        topbar.setLayoutParams(params);
+                        topbar.setVisibility(View.VISIBLE);
+                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+
+
+                        params1.weight=56.0f;
+                        fr.setLayoutParams(params1);
+                        selected =new PublicFragment();
                         break;
+                    }
                     case R.id.camera:
+                    {
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+                        params.weight = 6.0f;
+                        topbar.setVisibility(View.VISIBLE);
+                        topbar.setLayoutParams(params);
+                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+
+
+                        params1.weight=56.0f;
+                        fr.setLayoutParams(params1);
                         selected = new CameraFragment();
                         break;
+                    }
+
                     case R.id.setting:
+                    {
                         selected = new SettingFragment();
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                0, 0);
+                        params.weight = 0.0f;
+                        topbar.setLayoutParams(params);
+                        topbar.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+
+
+                        params1.weight=62.0f;
+                        fr.setLayoutParams(params1);
+                        break;
+                    }
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, selected).commit();
                 return true;

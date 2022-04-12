@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/light_grey">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,427 +25,467 @@
             app:layout_constraintVertical_bias="0.64" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="151dp"
-
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
-
-        android:background="@drawable/custom_button_login"
-        >
-
-        <view
-            android:id="@+id/view"
-            class="de.hdodenhof.circleimageview.CircleImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/test_ava"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.175" />
-
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.093"
-            app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.149" />
-
-        <TextView
-            android:id="@+id/user_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="8dp"
-            android:text="Email"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.062"
-            app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/user_name"
-            app:layout_constraintVertical_bias="0.007" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/user_email"
-            app:layout_constraintTop_toBottomOf="@+id/user_email" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="44dp"
-
-
-            android:layout_marginTop="40dp"
-            android:src="@drawable/camera"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="24dp"
-            android:layout_height="19dp"
-            android:src="@drawable/edit"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/user_email"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.181" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="@color/white">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="8dp"
-                android:src="@drawable/browser" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginVertical="10dp"
-                android:text="See your public album"
-                android:textAlignment="textStart"
-                android:textAllCaps="false" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:padding="12dp"
-                    android:src="@drawable/next" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="40dp"
-            android:background="@color/grey" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="8dp"
-                android:src="@drawable/saved" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginVertical="10dp"
-                android:text="Saved"
-                android:textAlignment="textStart"
-                android:textAllCaps="false" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:padding="12dp"
-                    android:src="@drawable/next" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="@color/white">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="8dp"
-                android:src="@drawable/acc" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginVertical="10dp"
-                android:text="Account"
-                android:textAlignment="textStart"
-                android:textAllCaps="false" />
-
-
-
-        </LinearLayout>
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="40dp"
-            android:background="@color/grey" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginVertical="10dp"
-
-                android:text="Change password"
-                android:textAlignment="textStart"
-                android:textAllCaps="false" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:padding="12dp"
-                    android:src="@drawable/next" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-
-            android:background="@color/grey" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginVertical="10dp"
-                android:text="Change email"
-                android:textAlignment="textStart"
-                android:textAllCaps="false" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:padding="12dp"
-                    android:src="@drawable/next" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:layout_marginHorizontal="10dp"
-            android:background="@color/white">
+            android:orientation="vertical" >
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="151dp"
+
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/custom_button_login"
+                >
+
+                <view
+                    android:id="@+id/view"
+                    class="de.hdodenhof.circleimageview.CircleImageView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/test_ava"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.045"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.175" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.093"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.149" />
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Email"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.062"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintTop_toBottomOf="@+id/user_name"
+                    app:layout_constraintVertical_bias="0.007" />
+
+                <TextView
+                    android:id="@+id/user_bdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/user_email"
+                    app:layout_constraintTop_toBottomOf="@+id/user_email" />
+
+                <TextView
+                    android:id="@+id/user_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/user_bdate"
+                    app:layout_constraintTop_toBottomOf="@+id/user_bdate" />
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="8dp"
-                    android:src="@drawable/security" />
+                    android:id="@+id/imageView4"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="44dp"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
 
-                    android:layout_marginVertical="10dp"
-                    android:text="Security"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false" />
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/camera"
+                    app:layout_constraintStart_toStartOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="@+id/view" />
 
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="40dp"
-                android:background="@color/grey" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/white">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginVertical="10dp"
-                    android:text="Set photo lock code"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false" />
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_alignParentRight="true"
-                        android:padding="12dp"
-                        android:src="@drawable/next" />
+                        android:padding="8dp"
+                        android:src="@drawable/browser" />
 
-                </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text="See your public album"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="12dp"
+                            android:src="@drawable/next" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/saved" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text="Saved"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="12dp"
+                            android:src="@drawable/next" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
-
-
-        </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:layout_marginHorizontal="10dp"
-        android:background="@color/white">
 
             <LinearLayout
-                android:id="@+id/Logout"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="8dp"
-                    android:src="@drawable/logout" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/white">
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    android:layout_marginVertical="10dp"
-                    android:text="Logout"
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/acc" />
 
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
+                        android:layout_marginVertical="10dp"
+                        android:text="Account"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+
+                        android:text=" Change password"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="12dp"
+                            android:src="@drawable/next" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text=" Change email"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="12dp"
+                            android:src="@drawable/next" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text=" Change information account"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="12dp"
+                            android:src="@drawable/next" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="40dp"
-                android:background="@color/grey" />
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/white">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
-                    android:src="@drawable/delete_acc" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    android:layout_marginVertical="10dp"
-                    android:text="Delete account"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false" />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/security" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text="Security"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text=" Set photo lock code"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="12dp"
+                            android:src="@drawable/next" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/white">
 
+                <LinearLayout
+                    android:id="@+id/Logout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/logout" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text="Logout"
+
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="5dp"
+                        android:src="@drawable/delete_acc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginVertical="10dp"
+                        android:text="Delete account"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
+
+    </ScrollView>
+
+
 </LinearLayout>
 
