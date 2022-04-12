@@ -64,7 +64,15 @@ public class Login extends AppCompatActivity {
             }
 
         });
-        //Action Sign in with Google
+        //Action Sign-in
+
+        SignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //Action Sign-in with Google
         SignInButton signInButton;
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -84,6 +92,15 @@ public class Login extends AppCompatActivity {
         //Action Sign Up
         SignUp.setPaintFlags(SignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
+        //Action Forgot Passwords
+        ForgotPassword.setPaintFlags(ForgotPassword.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, SignUp.class);
