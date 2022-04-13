@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/SU_TextEmailAddress"
@@ -73,11 +73,10 @@
         android:id="@+id/imageView3"
         android:layout_width="165dp"
         android:layout_height="161dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532"
         app:srcCompat="@drawable/logo" />
 
     <Button
@@ -118,11 +117,11 @@
         android:id="@+id/imageView2"
         android:layout_width="234dp"
         android:layout_height="116dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
         app:srcCompat="@drawable/appname" />
 
     <CheckBox
