@@ -1,5 +1,7 @@
 package com.example.bananaalbum.utils;
 
+import android.util.Log;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -45,8 +47,7 @@ public class PasswordManagement {
         return encryptedpassword;
     }
 
-    public static boolean comparePassword(String password, String encryptedpassword){
-        String saltvalue = PassBasedEnc.getSaltvalue(30);
+    public static boolean comparePassword(String password, String encryptedpassword, String saltvalue){
         Boolean status = PassBasedEnc.verifyUserPassword(password,encryptedpassword,saltvalue);
         if(status==true)
             return true;
@@ -98,9 +99,7 @@ class PassBasedEnc
     public static String generateSecurePassword(String password, String salt)
     {
         String finalval = null;
-
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-
         finalval = Base64.getEncoder().encodeToString(securePassword);
         return finalval;
     }
@@ -110,10 +109,11 @@ class PassBasedEnc
                                              String securedPassword, String salt)
     {
         boolean finalval = false;
-
+        Log.w("temp",salt);
         /* Generate New secure password with the same salt */
         String newSecurePassword = generateSecurePassword(providedPassword, salt);
-
+        Log.w("temp1",newSecurePassword);
+        Log.w("temp2",securedPassword);
         /* Check if two passwords are equal */
         finalval = newSecurePassword.equalsIgnoreCase(securedPassword);
 

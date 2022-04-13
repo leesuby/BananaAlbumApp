@@ -62,15 +62,13 @@ public class Login extends AppCompatActivity {
         TextView SignUp = (TextView) findViewById(R.id.ButtonSignUp);
 
         //Action Sign-in
-
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                     if(checkUser(Email.getText().toString(),Password.getText().toString()) == true){
-                        Toast.makeText(Login.this,"success",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this,"Sign-In Successfully",Toast.LENGTH_SHORT).show();
                         ToMainScreen();
-
                     }else{
                         Toast.makeText(Login.this,"Wrong username or password",Toast.LENGTH_SHORT).show();
                     }

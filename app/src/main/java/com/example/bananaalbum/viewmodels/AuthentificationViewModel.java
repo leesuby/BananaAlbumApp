@@ -23,27 +23,25 @@ public class AuthentificationViewModel {
     static Statement st;
     public static boolean checkUser(String username,String password)  {
         String encryptPassword = null;
+        String saltvalue = null;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         try{
-            Log.w("temp1","123");
             con = createConnection();
-            Log.w("temp1","456");
             st = con.createStatement();
-            sql = "Select users.password from users where username = ?;";
+            sql = "Select users.password, users.saltvalue from users where username = ?;";
             psm = con.prepareStatement(sql);
             psm.setString(1, username);
             rs = psm.executeQuery();
-
             while(rs.next()){
                 encryptPassword = rs.getString("password");
+                saltvalue = rs.getString("saltvalue");
             }
-            Log.w("temp4",encryptPassword);
             con.close();
         }catch (SQLException ex){
             ex.printStackTrace();
         }
-        if(comparePassword(encryptPassword,password) == true)
+        if(comparePassword(password,encryptPassword,saltvalue) == true)
             return true;
         else
             return false;
