@@ -1,8 +1,12 @@
 package com.example.bananaalbum.views;
 
+import static com.example.bananaalbum.utils.DatabaseConnector.createConnection;
+import static com.example.bananaalbum.viewmodels.AuthentificationViewModel.checkUser;
+
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,7 +27,11 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Login extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
@@ -58,16 +66,15 @@ public class Login extends AppCompatActivity {
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if(AuthentificationViewModel.checkUser(Email.getText().toString(),Password.getText().toString()) == true){
+
+                    if(checkUser(Email.getText().toString(),Password.getText().toString()) == true){
+                        Toast.makeText(Login.this,"success",Toast.LENGTH_SHORT).show();
                         ToMainScreen();
+
                     }else{
                         Toast.makeText(Login.this,"Wrong username or password",Toast.LENGTH_SHORT).show();
                     }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                    System.out.println(throwables.toString());
-                }
+
             }
         });
         //Action Sign-in with Google
@@ -106,6 +113,8 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
