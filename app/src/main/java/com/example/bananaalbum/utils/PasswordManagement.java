@@ -35,7 +35,7 @@ public class PasswordManagement {
             System.out.println("Password Mismatched");
     }
 
-    public String createPassword(String password) {
+    public static String createPassword(String password) {
         /* generates the Salt value. It can be stored in a database. */
         String saltvalue = PassBasedEnc.getSaltvalue(30);
 
@@ -45,7 +45,7 @@ public class PasswordManagement {
         return encryptedpassword;
     }
 
-    public boolean comparePassword(String password, String encryptedpassword){
+    public static boolean comparePassword(String password, String encryptedpassword){
         String saltvalue = PassBasedEnc.getSaltvalue(30);
         Boolean status = PassBasedEnc.verifyUserPassword(password,encryptedpassword,saltvalue);
         if(status==true)

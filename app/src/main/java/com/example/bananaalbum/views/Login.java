@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bananaalbum.R;
+import com.example.bananaalbum.viewmodels.AuthentificationViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -21,6 +22,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import java.sql.SQLException;
 
 public class Login extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
@@ -49,27 +52,22 @@ public class Login extends AppCompatActivity {
         Button Google = (Button) findViewById(R.id.ButtonGoogle);
         TextView ForgotPassword = (TextView) findViewById(R.id.ButtonForgotPassword);
         TextView SignUp = (TextView) findViewById(R.id.ButtonSignUp);
-        //Action Sign in
-        SignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Email.getText().toString().equals("admin") && Password.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(),
-                            "Login Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Login.this, MainScreen.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-        });
         //Action Sign-in
 
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    if(AuthentificationViewModel.checkUser(Email.getText().toString(),Password.getText().toString()) == true){
+                        ToMainScreen();
+                    }else{
+                        Toast.makeText(Login.this,"Wrong username or password",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    System.out.println(throwables.toString());
+                }
             }
         });
         //Action Sign-in with Google

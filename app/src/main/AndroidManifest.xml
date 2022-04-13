@@ -24,7 +24,7 @@
             android:exported="false" />
         <activity
             android:name=".views.User_setting"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".views.MainActivity"
             android:exported="true">

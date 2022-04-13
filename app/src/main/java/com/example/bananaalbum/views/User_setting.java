@@ -47,7 +47,6 @@ public class User_setting extends Activity {
                 user = new Account(rs.getString("name"), rs.getString("email"), rs.getDate("dob").toString()
                         , rs.getNString("address"));
             }
-
             conn.close();
             psm.close();
         } catch (SQLException e) {
