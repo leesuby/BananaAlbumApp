@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/grayscale"
-        android:icon="@drawable/ic_baseline_photo_album"
+        android:icon="@drawable/ic_baseline_gray"
         android:title="@string/grayscale" />
     <item
         android:id="@+id/flip"
@@ -14,12 +14,12 @@
         android:title="" />
     <item
         android:id="@+id/rotateLeft"
-        android:icon="@drawable/ic_baseline_public"
+        android:icon="@drawable/ic_baseline_rotate_left"
         android:title="@string/rotateLeft"/>
 
     <item
         android:id="@+id/rotateRight"
-        android:icon="@drawable/ic_baseline_public"
+        android:icon="@drawable/ic_baseline_rotate_right"
         android:title="@string/rotateRight"/>
 
 

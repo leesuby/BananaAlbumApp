@@ -40,12 +40,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
 public class EditPhoto extends AppCompatActivity {
 
     private ImageView imageView;
+    private  ArrayList<Bitmap> undoList;
+    private Bitmap fixedBitmap = null;
+    private int currentShowingIndex = 0;
+    private  FloatingActionButton btnUndo;
+    private  FloatingActionButton btnRedo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +74,14 @@ public class EditPhoto extends AppCompatActivity {
         }
         Picture p = (Picture) bundle.get("picture");
 
-
+        undoList = new ArrayList<>();
+        btnUndo = findViewById(R.id.UndoBtn);
+        btnRedo = findViewById(R.id.RedoBtn);
         imageView = findViewById(R.id.imageView5);
         imageView.setImageResource(p.getResourceId());
+        BitmapDrawable draw = (BitmapDrawable) imageView.getDrawable();
+        Bitmap baseBitmap = draw.getBitmap();
+        undoList.add(baseBitmap);
 
 
         BottomNavigationView navTab = findViewById(R.id.navBar1);
@@ -84,7 +95,6 @@ public class EditPhoto extends AppCompatActivity {
                 imageView.invalidate();
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
-                Bitmap fixedBitmap = null;
                 Matrix matrix = new Matrix();
                 switch (item.getItemId()){
                     case R.id.grayscale:
@@ -105,6 +115,19 @@ public class EditPhoto extends AppCompatActivity {
 
                 }
                 imageView.setImageBitmap(fixedBitmap);
+                try{
+                    recycleBitmapList(++currentShowingIndex);
+                    assert fixedBitmap != null;
+                    undoList.add(fixedBitmap.copy(fixedBitmap.getConfig(),true));
+                }catch (OutOfMemoryError error){
+                    undoList.get(1).recycle();
+                    undoList.remove(1);
+                    assert fixedBitmap != null;
+                    undoList.add(fixedBitmap.copy(fixedBitmap.getConfig(),true));
+                }
+                setButtonsVisibility();
+                System.out.println(undoList.size());
+                System.out.println(currentShowingIndex);
                 return true;
             }
         });
@@ -113,7 +136,6 @@ public class EditPhoto extends AppCompatActivity {
         btnAddAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView imageView = findViewById(R.id.imageView5);
                 BitmapDrawable draw = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = draw.getBitmap();
                 FileOutputStream outStream = null;
@@ -140,6 +162,78 @@ public class EditPhoto extends AppCompatActivity {
                 sendBroadcast(intent);
             }
         });
+        btnUndo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fixedBitmap != null) {
+                    if (!fixedBitmap.isRecycled()) {
+                        fixedBitmap.recycle();
+                    }
+                }
+                fixedBitmap = getUndoBitmap();
+                imageView.setImageBitmap(fixedBitmap);
+                setButtonsVisibility();
+            }
+        });
+
+        btnRedo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fixedBitmap != null) {
+                    if (!fixedBitmap.isRecycled()) {
+                        fixedBitmap.recycle();
+                    }
+                }
+                fixedBitmap = getRedoBitmap();
+                imageView.setImageBitmap(fixedBitmap);
+                setButtonsVisibility();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        recycleBitmapList(0);
+    }
+
+    private void setButtonsVisibility() {
+        if (currentShowingIndex > 0) {
+            System.out.println("aaaaaaa");
+            btnUndo.setEnabled(true);
+        }else {
+
+            btnUndo.setEnabled(false);
+        }
+
+        if (currentShowingIndex + 1 < undoList.size()) {
+            btnRedo.setEnabled(true);
+        }else {
+            btnRedo.setEnabled(false);
+        }
+    }
+
+    private void recycleBitmapList(int fromIndex){
+        while (fromIndex < undoList.size()){
+            undoList.get(fromIndex).recycle();
+            undoList.remove(fromIndex);
+        }
+    }
+
+    private Bitmap getUndoBitmap(){
+        if (currentShowingIndex - 1 >= 0)
+            currentShowingIndex -= 1;
+        else
+            currentShowingIndex = 0;
+        return undoList.get(currentShowingIndex).copy(undoList.get(currentShowingIndex).getConfig(), true);
+    }
+
+    private Bitmap getRedoBitmap(){
+        if (currentShowingIndex + 1 <= undoList.size())
+            currentShowingIndex += 1;
+        else
+            currentShowingIndex = undoList.size() - 1;
+        return undoList.get(currentShowingIndex).copy(undoList.get(currentShowingIndex).getConfig(), true);
     }
 
     private File createImageFile() {
@@ -151,9 +245,6 @@ public class EditPhoto extends AppCompatActivity {
 
     public Bitmap toGrayscale(Bitmap bmpOriginal) {
         Bitmap bmpGrayscale = Bitmap.createBitmap(bmpOriginal.getWidth(),bmpOriginal.getHeight(), bmpOriginal.getConfig());
-        double red = 0.33;
-        double green = 0.59;
-        double blue = 0.11;
 
         for (int i = 0; i < bmpOriginal.getWidth(); i++) {
             for (int j = 0; j < bmpOriginal.getHeight(); j++) {
