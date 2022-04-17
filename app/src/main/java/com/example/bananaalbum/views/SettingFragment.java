@@ -2,12 +2,14 @@ package com.example.bananaalbum.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +25,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 
 import java.util.concurrent.Executor;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingFragment extends Fragment {
     TextView username, email;
@@ -32,6 +40,13 @@ public class SettingFragment extends Fragment {
     GoogleSignInAccount account;
     GoogleSignInClient mGoogleSignInClient;
     Context con;
+    CircleImageView avatar;
+    DatabaseReference databaseReference ;
+    FirebaseAuth mAuth;
+    Uri imgURI;
+    String myURI = "";
+    StorageTask uploadTask;
+    StorageReference storageReference;
 
     @Nullable
     @Override
@@ -41,6 +56,7 @@ public class SettingFragment extends Fragment {
         username = userSetting.findViewById(R.id.user_name);
         email = userSetting.findViewById(R.id.user_email);
         logoutBtn = userSetting.findViewById(R.id.Logout);
+        avatar = userSetting.findViewById(R.id.user_avatar);
         // get Google account
         MainScreen mainScreen = (MainScreen)getActivity();
         account = mainScreen.account;

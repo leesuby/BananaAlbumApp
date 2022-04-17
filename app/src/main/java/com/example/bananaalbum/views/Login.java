@@ -1,5 +1,6 @@
 package com.example.bananaalbum.views;
 
+import static android.content.ContentValues.TAG;
 import static com.example.bananaalbum.utils.DatabaseConnector.createConnection;
 import static com.example.bananaalbum.viewmodels.AuthentificationViewModel.checkUser;
 
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bananaalbum.R;
@@ -25,7 +27,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +43,8 @@ import java.sql.Statement;
 
 public class Login extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
-    static final int RC_SIGN_IN = 0;
+    static final int RC_SIGN_IN = 123;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +69,7 @@ public class Login extends AppCompatActivity {
         Button Google = (Button) findViewById(R.id.ButtonGoogle);
         TextView ForgotPassword = (TextView) findViewById(R.id.ButtonForgotPassword);
         TextView SignUp = (TextView) findViewById(R.id.ButtonSignUp);
-
+        mAuth=FirebaseAuth.getInstance();
         //Action Sign-in
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +87,7 @@ public class Login extends AppCompatActivity {
         //Action Sign-in with Google
         SignInButton signInButton;
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.clientID))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -131,12 +141,34 @@ public class Login extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            firebaseAuthWithGoogle(account);
             Toast.makeText(this, "Sign-in Successfully",Toast.LENGTH_SHORT).show();
-            ToMainScreen();
+
         } catch (ApiException e) {
             Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
         }
     }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(firebaseCredential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            ToMainScreen();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+
+                        }
+                    }
+                });
+    }
+
     private void ToMainScreen(){
         Intent intent = new Intent(this, MainScreen.class);
         startActivity(intent);
@@ -145,7 +177,9 @@ public class Login extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null){
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(account != null && user!=null){
             Toast.makeText(this,"User Already Signed-in",Toast.LENGTH_SHORT).show();
             ToMainScreen();
         }

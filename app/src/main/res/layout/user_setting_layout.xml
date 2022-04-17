@@ -39,15 +39,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="151dp"
 
-                android:layout_marginBottom="20dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
 
-                android:background="@drawable/custom_button_login"
-                >
+                android:background="@drawable/custom_button_login">
 
                 <view
-                    android:id="@+id/view"
+                    android:id="@+id/user_avatar"
                     class="de.hdodenhof.circleimageview.CircleImageView"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -68,7 +67,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.093"
-                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintStart_toEndOf="@+id/user_avatar"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.149" />
 
@@ -76,15 +75,14 @@
                     android:id="@+id/user_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
                     android:layout_marginTop="8dp"
                     android:text="Email"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.062"
-                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/user_name"
                     app:layout_constraintTop_toBottomOf="@+id/user_name"
-                    app:layout_constraintVertical_bias="0.007" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/user_bdate"
@@ -112,13 +110,13 @@
                     android:id="@+id/imageView4"
                     android:layout_width="25dp"
                     android:layout_height="20dp"
-                    android:layout_marginStart="44dp"
 
 
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="40dp"
                     android:src="@drawable/camera"
-                    app:layout_constraintStart_toStartOf="@+id/view"
-                    app:layout_constraintTop_toTopOf="@+id/view" />
+                    app:layout_constraintStart_toStartOf="@+id/user_avatar"
+                    app:layout_constraintTop_toTopOf="@+id/user_avatar" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
