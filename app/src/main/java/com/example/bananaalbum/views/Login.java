@@ -4,10 +4,12 @@ import static android.content.ContentValues.TAG;
 import static com.example.bananaalbum.utils.DatabaseConnector.createConnection;
 import static com.example.bananaalbum.viewmodels.AuthentificationViewModel.checkUser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -46,6 +48,7 @@ public class Login extends AppCompatActivity {
     static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,12 +78,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    if(checkUser(Email.getText().toString(),Password.getText().toString()) == true){
-                        Toast.makeText(Login.this,"Sign-In Successfully",Toast.LENGTH_SHORT).show();
-                        ToMainScreen();
-                    }else{
-                        Toast.makeText(Login.this,"Wrong username or password",Toast.LENGTH_SHORT).show();
-                    }
+
+                SignInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString());
 
             }
         });
@@ -122,6 +121,31 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void SignInWithEmailAndPassword(String email, String pw) {
+        if (TextUtils.isEmpty(email)){
+            Toast.makeText(this, "Please enter your email",Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(pw)){
+            Toast.makeText(this, "Please enter your password",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.signInWithEmailAndPassword(email, pw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+
+                        Toast.makeText(Login.this, "Sign-in Successfully",Toast.LENGTH_SHORT).show();
+                        ToMainScreen();
+                        finish();
+                    }
+                    else {
+                        Toast.makeText(Login.this, "Sign-in failed",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
 
 
     private void signIn() {

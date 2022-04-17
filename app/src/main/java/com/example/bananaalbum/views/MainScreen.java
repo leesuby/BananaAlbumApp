@@ -41,8 +41,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.Executor;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -73,6 +77,7 @@ public class MainScreen extends AppCompatActivity {
 
         ConstraintLayout topbar=findViewById(R.id.topbar);
         FrameLayout fr = findViewById(R.id.fragment_navTab);
+        CircleImageView avatar = findViewById(R.id.imgProfile);
 
         navTab.setBackground(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new HomeFragment()).commit();
@@ -89,6 +94,7 @@ public class MainScreen extends AppCompatActivity {
             String personEmail = account.getEmail();
             String personId = account.getId();
             Uri personPhoto = account.getPhotoUrl();
+            Picasso.get().load(account.getPhotoUrl()).into(avatar);
         }
         navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("QueryPermissionsNeeded")
@@ -257,7 +263,9 @@ public class MainScreen extends AppCompatActivity {
     }
 
     public void signOut() {
+        FirebaseAuth.getInstance().signOut();
         if(account!=null){
+
             client.signOut()
                     .addOnCompleteListener( this, new OnCompleteListener<Void>() {
                         @Override
@@ -267,6 +275,10 @@ public class MainScreen extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+        }
+        else {
+            Intent intent= new Intent(MainScreen.this,Login.class);
+            startActivity(intent);
         }
     }
 

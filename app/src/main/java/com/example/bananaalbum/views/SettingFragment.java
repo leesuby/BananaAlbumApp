@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.Executor;
 
@@ -69,6 +70,7 @@ public class SettingFragment extends Fragment {
             String name = capitalizeString(str);
             username.setText(name);
             email.setText(personEmail);
+            Picasso.get().load(account.getPhotoUrl()).into(avatar);
         }
         // Logout button
         logoutBtn.setOnClickListener(new View.OnClickListener() {
