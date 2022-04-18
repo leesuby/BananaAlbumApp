@@ -12,6 +12,7 @@
     <color name="light_skin">#FFEEBB</color>
     <color name="skin">#FFDCB8</color>
     <color name="light_pink">#FFC1B6</color>
+    <color name="light_pink_1">#ffe6e8</color>
     <color name="staleblue">#6A5ACD</color>
     <color name="crimson">#DC143C</color>
     <color name="blue_gray">#CDDEEE</color>
@@ -21,6 +22,7 @@
     <color name="pastel">#EFDAD7</color>
     <color name="purple">#E3BEC6</color>
     <color name="pink">#F10086</color>
+
     <color name="grey">#D1D1D1</color>
     <color name="dark_grey">#8D8DAA</color>
     <color name="light_grey">#F2F3F5</color>
