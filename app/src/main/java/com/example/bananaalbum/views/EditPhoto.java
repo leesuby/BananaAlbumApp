@@ -50,8 +50,8 @@ public class EditPhoto extends AppCompatActivity {
     private  ArrayList<Bitmap> undoList;
     private Bitmap fixedBitmap = null;
     private int currentShowingIndex = 0;
-    private  FloatingActionButton btnUndo;
-    private  FloatingActionButton btnRedo;
+    private FloatingActionButton btnUndo;
+    private FloatingActionButton btnRedo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,8 +126,6 @@ public class EditPhoto extends AppCompatActivity {
                     undoList.add(fixedBitmap.copy(fixedBitmap.getConfig(),true));
                 }
                 setButtonsVisibility();
-                System.out.println(undoList.size());
-                System.out.println(currentShowingIndex);
                 return true;
             }
         });
@@ -199,10 +197,8 @@ public class EditPhoto extends AppCompatActivity {
 
     private void setButtonsVisibility() {
         if (currentShowingIndex > 0) {
-            System.out.println("aaaaaaa");
             btnUndo.setEnabled(true);
         }else {
-
             btnUndo.setEnabled(false);
         }
 
