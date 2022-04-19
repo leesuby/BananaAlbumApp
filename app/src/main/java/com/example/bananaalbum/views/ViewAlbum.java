@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +44,8 @@ public class ViewAlbum extends AppCompatActivity {
     ImageButton backBtn,editBtn,infoBtn,exitEditBtn;
     FloatingActionButton floatingAddActionButton,floatingDeleteActionButton;
     PictureViewModel viewModel;
+    ViewGroup tcontainer;
+    LinearLayout album_info;
 
 
 
@@ -75,8 +80,9 @@ public class ViewAlbum extends AppCompatActivity {
         exitEditBtn = findViewById(R.id.btn_exitEditAlbum);
         floatingAddActionButton = findViewById(R.id.flbtnAdd_album);
         floatingDeleteActionButton = findViewById(R.id.flbtnDelete_album);
-
+        tcontainer = findViewById(R.id.tcontainer);
         AlbumName.setText(a.getName());
+        album_info = findViewById(R.id.album_info);
 
 
         // ViewModel for RecylerView Picture
@@ -145,6 +151,26 @@ public class ViewAlbum extends AppCompatActivity {
 
                 exitEditBtn.setVisibility(View.VISIBLE);
                 floatingDeleteActionButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            boolean visable;
+            @Override
+            public void onClick(View view) {
+
+
+                TransitionManager.beginDelayedTransition(tcontainer);
+                visable = !visable;
+                album_info.setVisibility(visable? View.VISIBLE : View.GONE);
+                if(visable){
+                    infoBtn.setBackgroundResource(R.drawable.ic_outline_info);
+                }
+                else {
+                    infoBtn.setBackgroundResource(R.drawable.ic_baseline_info);
+                }
+
+
             }
         });
 

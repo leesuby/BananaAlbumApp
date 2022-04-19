@@ -29,7 +29,7 @@ public class AuthentificationViewModel {
         try{
             con = createConnection();
             st = con.createStatement();
-            sql = "Select users.password, users.saltvalue from users where username = ?;";
+            sql = "Select users.password, users.saltvalue from users where email = ?;";
             psm = con.prepareStatement(sql);
             psm.setString(1, username);
             rs = psm.executeQuery();
