@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Setting"
+            android:textColor="@color/crimson"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,10 +38,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="151dp"
+                android:layout_height="95dp"
 
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
 
                 android:background="@drawable/custom_button_login">
@@ -50,13 +51,14 @@
                     class="de.hdodenhof.circleimageview.CircleImageView"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/test_ava"
+
+                    android:src="@drawable/outline_account_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.045"
+                    app:layout_constraintHorizontal_bias="0.048"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.175" />
+                    app:layout_constraintVertical_bias="0.542" />
 
                 <TextView
                     android:id="@+id/user_name"
@@ -69,7 +71,7 @@
                     app:layout_constraintHorizontal_bias="0.093"
                     app:layout_constraintStart_toEndOf="@+id/user_avatar"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.149" />
+                    app:layout_constraintVertical_bias="0.267" />
 
                 <TextView
                     android:id="@+id/user_email"
@@ -82,41 +84,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/user_name"
                     app:layout_constraintTop_toBottomOf="@+id/user_name"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/user_bdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text=""
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/user_email"
-                    app:layout_constraintTop_toBottomOf="@+id/user_email" />
-
-                <TextView
-                    android:id="@+id/user_addr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text=""
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/user_bdate"
-                    app:layout_constraintTop_toBottomOf="@+id/user_bdate" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-
-
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/camera"
-                    app:layout_constraintStart_toStartOf="@+id/user_avatar"
-                    app:layout_constraintTop_toTopOf="@+id/user_avatar" />
+                    app:layout_constraintVertical_bias="0.36" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -311,6 +279,7 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -329,7 +298,7 @@
                         android:layout_height="wrap_content"
 
                         android:layout_marginVertical="10dp"
-                        android:text=" Change information account"
+                        android:text=" Update profile"
                         android:textAlignment="textStart"
                         android:textAllCaps="false" />
 
@@ -347,6 +316,7 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
 
 
