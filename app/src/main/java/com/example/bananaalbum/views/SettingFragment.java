@@ -26,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -48,20 +49,28 @@ public class SettingFragment extends Fragment {
     String myURI = "";
     StorageTask uploadTask;
     StorageReference storageReference;
+    LinearLayout changePw,changeEmail,updateProfile;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View userSetting =  inflater.inflate(R.layout.user_setting_layout, container, false);
+
         // get components
         username = userSetting.findViewById(R.id.user_name);
         email = userSetting.findViewById(R.id.user_email);
         logoutBtn = userSetting.findViewById(R.id.Logout);
         avatar = userSetting.findViewById(R.id.user_avatar);
+        changePw =userSetting.findViewById(R.id.change_password);
+        changeEmail =userSetting.findViewById(R.id.change_email);
+        updateProfile =userSetting.findViewById(R.id.update_profile);
+
         // get Google account
         MainScreen mainScreen = (MainScreen)getActivity();
         account = mainScreen.account;
         mGoogleSignInClient = mainScreen.client;
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
         if(account!=null){
             String personGivenName = account.getGivenName();
             String personFamilyName = account.getFamilyName();
@@ -72,7 +81,34 @@ public class SettingFragment extends Fragment {
             email.setText(personEmail);
             Picasso.get().load(account.getPhotoUrl()).into(avatar);
         }
+        else if (user != null){
+            String name =user.getDisplayName();
+            Uri avatarURI = user.getPhotoUrl();
+            if (name != null)
+                username.setText(name);
+            email.setText(user.getEmail());
+            if (avatarURI != null)
+                Picasso.get().load(avatarURI).into(avatar);
+        }
         // Logout button
+        changePw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new ChangePassword()).commit();
+            }
+        });
+        changeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new ChangeEmail()).commit();
+            }
+        });
+        updateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new UpdateProfile()).commit();
+            }
+        });
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

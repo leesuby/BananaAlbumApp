@@ -42,6 +42,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.Executor;
@@ -58,6 +59,8 @@ public class MainScreen extends AppCompatActivity {
 
     public GoogleSignInAccount account;
     public GoogleSignInClient client;
+    FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +73,13 @@ public class MainScreen extends AppCompatActivity {
 
         //Remove action bar
         getSupportActionBar().hide();
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         setContentView(R.layout.activity_main_screen);
 
         BottomNavigationView navTab = findViewById(R.id.navBar);
+
 
         ConstraintLayout topbar=findViewById(R.id.topbar);
         FrameLayout fr = findViewById(R.id.fragment_navTab);
@@ -95,6 +101,9 @@ public class MainScreen extends AppCompatActivity {
             String personId = account.getId();
             Uri personPhoto = account.getPhotoUrl();
             Picasso.get().load(account.getPhotoUrl()).into(avatar);
+        }
+        else if (user != null) {
+            Picasso.get().load(user.getPhotoUrl()).into(avatar);
         }
         navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("QueryPermissionsNeeded")

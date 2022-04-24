@@ -28,11 +28,11 @@ public class User_setting extends Activity {
         TextView name,email,bdate,addr;
         name= findViewById(R.id.user_name);
         email=findViewById(R.id.user_email);
-        bdate=findViewById(R.id.user_bdate);
-        addr=findViewById(R.id.user_addr);
+
         Account user = null;
         String sql;
         ResultSet rs;
+
 
         Connection conn = createConnection();
         PreparedStatement psm = null;
@@ -54,8 +54,7 @@ public class User_setting extends Activity {
         }
         name.setText(user._name);
         email.setText(user._email);
-        bdate.setText(user._bdate);
-        addr.setText(user._address);
+
 
 
     }
