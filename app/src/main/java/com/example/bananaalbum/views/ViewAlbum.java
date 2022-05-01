@@ -1,10 +1,14 @@
 package com.example.bananaalbum.views;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +38,7 @@ import com.example.bananaalbum.model.Picture;
 import com.example.bananaalbum.viewmodels.AlbumViewModel;
 import com.example.bananaalbum.viewmodels.PictureViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +92,8 @@ public class ViewAlbum extends AppCompatActivity {
 
         // ViewModel for RecylerView Picture
         viewModel = new ViewModelProvider(this).get(PictureViewModel.class);
+        //TODO mama: lấy toàn bộ ảnh thuộc AlbumName(biến ở trên) về
+
         viewModel.getListPictureLiveData().observe(this, new Observer<List<Picture>>() {
             @Override
             public void onChanged(List<Picture> pictures) {
@@ -116,8 +123,8 @@ public class ViewAlbum extends AppCompatActivity {
         floatingAddActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.addPicture(new Picture(R.drawable.test_ava4));
-                Toast.makeText(ViewAlbum.this, "Add Successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ViewAlbum.this, AddPhoto.class);
+                startActivity(intent);
 
             }
         });
@@ -223,6 +230,26 @@ public class ViewAlbum extends AppCompatActivity {
         });
 
         dg.show();
+
+    }
+
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPref = this.getSharedPreferences("uri", Context.MODE_PRIVATE);
+        String uriString = sharedPref.getString("uri", "");
+        SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = mySPrefs.edit();
+        editor.remove("uri");
+        editor.apply();
+
+        String AlbumName = this.AlbumName.getText().toString();
+
+        //TODO mama: upload ảnh vào albumName của người dùng
+
+//        if(uriString.length()!=0){
+//            Picasso.get().load(Uri.parse(uriString)).into(up_avatar);
+//        }
+        Toast.makeText(this,uriString,Toast.LENGTH_SHORT).show();
 
     }
 }

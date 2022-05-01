@@ -20,13 +20,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -43,6 +47,12 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static int SPLASH_SCREEN=3500;
+
+    Animation topAnimation,botAnimation;
+    ImageView logo,name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -55,9 +65,26 @@ public class MainActivity extends AppCompatActivity {
 
         //Remove action bar
         getSupportActionBar().hide();
+        setContentView(R.layout.splash_screen);
 
-        Intent intent = new Intent(MainActivity.this, Login.class);
-        startActivity(intent);
+        topAnimation = AnimationUtils.loadAnimation(this,R.anim.top_splash);
+        botAnimation = AnimationUtils.loadAnimation(this,R.anim.bot_splash);
+
+        logo= findViewById(R.id.logoSC);
+        name= findViewById(R.id.nameSC);
+
+        logo.setAnimation(topAnimation);
+        name.setAnimation(botAnimation);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        },SPLASH_SCREEN);
+
     }
 
 

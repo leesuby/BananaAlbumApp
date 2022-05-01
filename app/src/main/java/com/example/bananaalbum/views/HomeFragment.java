@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
 
 
         albumViewModel = new ViewModelProvider(this.getActivity()).get(AlbumViewModel.class);
+        //TODO mama: lấy album của người dùng về
+
         albumViewModel.getListAlbumLiveData().observe(this.getActivity(), new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albums) {
