@@ -46,7 +46,7 @@ import java.util.List;
 public class ViewAlbum extends AppCompatActivity {
     TextView AlbumName;
     RecyclerView rcvPic;
-    ImageButton backBtn,editBtn,infoBtn,exitEditBtn;
+    ImageButton backBtn,editBtn,infoBtn,exitEditBtn,deleteBtn;
     FloatingActionButton floatingAddActionButton,floatingDeleteActionButton;
     PictureViewModel viewModel;
     ViewGroup tcontainer;
@@ -83,6 +83,7 @@ public class ViewAlbum extends AppCompatActivity {
         editBtn = findViewById(R.id.btn_editAlbum);
         infoBtn = findViewById(R.id.btn_infoAlbum);
         exitEditBtn = findViewById(R.id.btn_exitEditAlbum);
+        deleteBtn = findViewById(R.id.deleteAlbumBtn);
         floatingAddActionButton = findViewById(R.id.flbtnAdd_album);
         floatingDeleteActionButton = findViewById(R.id.flbtnDelete_album);
         tcontainer = findViewById(R.id.tcontainer);
@@ -181,6 +182,13 @@ public class ViewAlbum extends AppCompatActivity {
             }
         });
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConfirmDialogAlbum();
+            }
+        });
+
         exitEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,6 +240,42 @@ public class ViewAlbum extends AppCompatActivity {
         dg.show();
 
     }
+
+    private void openConfirmDialogAlbum() {
+        final Dialog dg = new Dialog(this);
+        dg.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dg.setContentView(R.layout.dialog_confirm_deletealbum);
+
+        Window window = dg.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        Button backBtn = dg.findViewById(R.id.btnBackConfirmDeleteAlbum), acceptBtn = dg.findViewById(R.id.btnAcceptConfirmDeleteAlbum);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dg.dismiss();
+            }
+        });
+
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO mama: delete album người dùng với AlbumName
+                Toast.makeText(ViewAlbum.this, "Delete Successfully", Toast.LENGTH_SHORT).show();
+                dg.dismiss();
+            }
+        });
+        dg.show();
+
+    }
+
 
     public void onResume() {
         super.onResume();
