@@ -49,9 +49,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -71,6 +77,12 @@ public class MainScreen extends AppCompatActivity {
     public GoogleSignInClient client;
     FirebaseAuth mAuth;
     private SettingFragment settings;
+    FirebaseUser user;
+    CircleImageView avatar;
+    FrameLayout fr;
+    ConstraintLayout topbar;
+
+    private String avatarURI ="";
 
 
 
@@ -86,17 +98,46 @@ public class MainScreen extends AppCompatActivity {
         settings = new SettingFragment();
         //Remove action bar
         getSupportActionBar().hide();
-        mAuth=FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference reference = firebaseDatabase.getReference();
+        reference.child("data").child(user.getUid()).child("profile").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            Log.e("TAG", avatarURI);
+                            Picasso.get().load(Uri.parse(""+dataSnapshot.getValue())).into(avatar);
+
+                            // your name values you will get here
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("TAG", " it's null.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("onCancelled", " cancelled");
+            }
+        });
+
+
 
         setContentView(R.layout.activity_main_screen);
 
         BottomNavigationView navTab = findViewById(R.id.navBar);
 
 
-        ConstraintLayout topbar=findViewById(R.id.topbar);
-        FrameLayout fr = findViewById(R.id.fragment_navTab);
-        CircleImageView avatar = findViewById(R.id.imgProfile);
+        topbar=findViewById(R.id.topbar);
+        fr = findViewById(R.id.fragment_navTab);
+        avatar = findViewById(R.id.imgProfile);
 
         navTab.setBackground(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new HomeFragment()).commit();
@@ -116,8 +157,10 @@ public class MainScreen extends AppCompatActivity {
             Picasso.get().load(account.getPhotoUrl()).into(avatar);
         }
         else if (user != null) {
-            Picasso.get().load(user.getPhotoUrl()).into(avatar);
+            Log.e("TAG", avatarURI);
+
         }
+
         navTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("QueryPermissionsNeeded")
             @Override
@@ -232,10 +275,9 @@ public class MainScreen extends AppCompatActivity {
 
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { //TODO mama: upload album của người dùng lên firebase với album a
-                Album a = new Album(name.getText().toString());
+            public void onClick(View view) {
                 albumViewModel = new ViewModelProvider(MainScreen.this).get(AlbumViewModel.class);
-                albumViewModel.addAlbum(a);
+                albumViewModel.addAlbum(new Album(name.getText().toString()));
                 Toast.makeText(MainScreen.this, "Add Successfully", Toast.LENGTH_SHORT).show();
                 dg.dismiss();
             }
@@ -307,28 +349,13 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
-    public void updateProfile(String name, Uri avt) {
-        FirebaseUser user = mAuth.getCurrentUser();
-        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                .setDisplayName(name)
-                .setPhotoUri(avt)
-                .build();
-
-
-        user.updateProfile(profileChangeRequest)
-                .addOnCompleteListener((new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(MainScreen.this,"Update profile sucessfully!",Toast.LENGTH_SHORT).show();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new SettingFragment()).commit();
-
-                        }
-                    }
-                }));
+    public String getAvatarURI() {
+        return avatarURI;
     }
 
-
+    public void setAvatarURI(String avatarURI) {
+        this.avatarURI = avatarURI;
+    }
 
 
     //        rcvTest=findViewById(R.id.rcv_test);
