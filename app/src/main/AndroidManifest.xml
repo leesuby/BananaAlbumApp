@@ -49,6 +49,7 @@
         <activity android:name=".views.AddPhoto" />
         <activity android:name=".views.EditPhoto" />
         <activity android:name=".views.ViewAlbum" />
+        <activity android:name=".views.ForgotPassword"/>
     </application>
 
 </manifest>
