@@ -3,6 +3,8 @@ package com.example.bananaalbum.views;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,11 +18,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bananaalbum.R;
 import com.example.bananaalbum.utils.PasswordManagement;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignUp extends AppCompatActivity {
-    TextView SignUpUI;
+    TextView LoginUI;
     EditText Username, Password, Email;
     Button Register;
+    private FirebaseAuth mAuth;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -33,14 +43,15 @@ public class SignUp extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_signup);
         //Button and Text
-        SignUpUI = (TextView) findViewById(R.id.LoginUI);
-        Username = (EditText) findViewById(R.id.SU_TextName);
+        LoginUI = (TextView) findViewById(R.id.LoginUI);
         Password = (EditText) findViewById(R.id.SU_TextPassword);
         Email = (EditText) findViewById(R.id.SU_TextEmailAddress);
         Register = (Button) findViewById(R.id.ButtonRegister);
+        //Firebase
+        mAuth=FirebaseAuth.getInstance();
         // Action Sign in
-        SignUpUI.setPaintFlags(SignUpUI.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        SignUpUI.setOnClickListener(new View.OnClickListener() {
+        LoginUI.setPaintFlags(LoginUI.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        LoginUI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUp.this, Login.class);
@@ -48,11 +59,31 @@ public class SignUp extends AppCompatActivity {
             }
         });
         //Action Register
-        PasswordManagement PM = new PasswordManagement();
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.w("Pass", PM.createPassword(Password.getText().toString()));
+                String email = Email.getText().toString();
+                String pass = Password.getText().toString();
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(getApplicationContext(),"Please enter your E-mail address",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(pass)){
+                    Toast.makeText(getApplicationContext(),"Please enter your Password",Toast.LENGTH_LONG).show();
+                }
+                mAuth.createUserWithEmailAndPassword(email,pass)
+                        .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(SignUp.this, "ERROR",Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    startActivity(new Intent(SignUp.this, Login.class));
+                                    finish();
+                                }
+                            }
+                        });
             }
         });
     }

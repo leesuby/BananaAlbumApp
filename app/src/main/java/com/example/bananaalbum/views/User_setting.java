@@ -55,7 +55,5 @@ public class User_setting extends Activity {
         name.setText(user._name);
         email.setText(user._email);
 
-
-
     }
 }

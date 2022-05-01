@@ -93,18 +93,16 @@ public class SettingFragment extends Fragment {
 
             Picasso.get().load(account.getPhotoUrl()).into(avatar);
             accountLayout.setVisibility(View.GONE);
-
         }
-        else
-        if (user != null){
-            String name =user.getDisplayName();
+        else if (user != null){
+            String name = user.getDisplayName();
             Uri avatarURI = user.getPhotoUrl();
             if (name != null)
                 username.setText(name);
-            email.setText(user.getEmail());
+                email.setText(user.getEmail());
             if (avatarURI != null)
                 Picasso.get().load(avatarURI).into(avatar);
-            accountLayout.setVisibility(View.VISIBLE);
+                accountLayout.setVisibility(View.VISIBLE);
         }
 
 

@@ -75,7 +75,6 @@ public class UpdateProfile extends Fragment {
                 }
                 if (fname==null || fname.length()==0){
                     fname = name;
-
                 }
                 if (uriString.length()!=0){
                     avtUri=Uri.parse(uriString);
@@ -94,9 +93,7 @@ public class UpdateProfile extends Fragment {
 
     private void uploadAvatar() {
         Intent intent= new Intent(getActivity(),AddPhoto.class);
-
         startActivity(intent);
-
     }
 
 
