@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class UpdateProfile extends AppCompatActivity {
     CircleImageView up_avatar;
     TextView fullname;
     Button updateBtn;
+    ImageButton backBtn;
     FirebaseAuth mAuth;
     String name ="";
     private Uri avtUri;
@@ -73,6 +75,7 @@ public class UpdateProfile extends AppCompatActivity {
         updateBtn = findViewById(R.id.updateBtn);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        backBtn = findViewById(R.id.btn_backUpdateProfile);
 
         getUserInfo();
 
@@ -95,6 +98,13 @@ public class UpdateProfile extends AppCompatActivity {
                 String fname= fullname.getText().toString().trim();
                 updateProfile(fname);
                 uploadImage();
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
