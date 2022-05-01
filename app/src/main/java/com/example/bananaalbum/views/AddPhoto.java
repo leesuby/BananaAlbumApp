@@ -1,5 +1,6 @@
 package com.example.bananaalbum.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -41,6 +42,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddPhoto extends AppCompatActivity {
     private Bitmap bitmap;
     private static final int RI = 12345;
+    Bundle uri = new Bundle();
     private Uri imageUri;
     private static final int MAX_PIXEL_COUNT = 2048;
 
@@ -60,9 +62,20 @@ public class AddPhoto extends AppCompatActivity {
         if (resultCode == MainActivity.RESULT_OK) {
             if (requestCode == RI) {
                 imageUri = data.getData();
+                SharedPreferences sf = getSharedPreferences("uri", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sf.edit();
+                editor.putString("uri", imageUri.toString());
+                editor.commit();
+                finish();
             }
-            System.out.println(imageUri.toString());
+
         }
         ;
     }
+
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
+
 }

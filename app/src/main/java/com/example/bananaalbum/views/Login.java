@@ -203,7 +203,7 @@ public class Login extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         FirebaseUser user = mAuth.getCurrentUser();
 
-        if(account != null && user!=null){
+        if(account != null || user!=null){
             Toast.makeText(this,"User Already Signed-in",Toast.LENGTH_SHORT).show();
             ToMainScreen();
         }

@@ -1,9 +1,14 @@
 package com.example.bananaalbum.views;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,13 +53,14 @@ public class SettingFragment extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
     Context con;
     CircleImageView avatar;
-    DatabaseReference databaseReference ;
+
+
     FirebaseAuth mAuth;
     Uri imgURI;
     String myURI = "";
-    StorageTask uploadTask;
-    StorageReference storageReference;
-    LinearLayout changePw,changeEmail,updateProfile;
+
+    LinearLayout changePw,changeEmail,updateProfile, accountLayout;
+
 
     @Nullable
     @Override
@@ -64,7 +75,7 @@ public class SettingFragment extends Fragment {
         changePw =userSetting.findViewById(R.id.change_password);
         changeEmail =userSetting.findViewById(R.id.change_email);
         updateProfile =userSetting.findViewById(R.id.update_profile);
-
+        accountLayout = userSetting.findViewById(R.id.accLayout);
         // get Google account
         MainScreen mainScreen = (MainScreen)getActivity();
         account = mainScreen.account;
@@ -79,9 +90,13 @@ public class SettingFragment extends Fragment {
             String name = capitalizeString(str);
             username.setText(name);
             email.setText(personEmail);
+
             Picasso.get().load(account.getPhotoUrl()).into(avatar);
+            accountLayout.setVisibility(View.GONE);
+
         }
-        else if (user != null){
+        else
+        if (user != null){
             String name =user.getDisplayName();
             Uri avatarURI = user.getPhotoUrl();
             if (name != null)
@@ -89,7 +104,10 @@ public class SettingFragment extends Fragment {
             email.setText(user.getEmail());
             if (avatarURI != null)
                 Picasso.get().load(avatarURI).into(avatar);
+            accountLayout.setVisibility(View.VISIBLE);
         }
+
+
         // Logout button
         changePw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +133,11 @@ public class SettingFragment extends Fragment {
                  mainScreen.signOut();
             }
         });
+
         return userSetting;
     }
+
+
 
     public static String capitalizeString(String string) {
         char[] chars = string.toLowerCase().toCharArray();
@@ -131,4 +152,6 @@ public class SettingFragment extends Fragment {
         }
         return String.valueOf(chars);
     }
+
+
 }

@@ -1,6 +1,11 @@
 package com.example.bananaalbum.views;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -9,15 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,8 +51,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -60,6 +70,9 @@ public class MainScreen extends AppCompatActivity {
     public GoogleSignInAccount account;
     public GoogleSignInClient client;
     FirebaseAuth mAuth;
+    private SettingFragment settings;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +83,7 @@ public class MainScreen extends AppCompatActivity {
 
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        settings = new SettingFragment();
         //Remove action bar
         getSupportActionBar().hide();
         mAuth=FirebaseAuth.getInstance();
@@ -165,7 +178,7 @@ public class MainScreen extends AppCompatActivity {
 
                     case R.id.setting:
                     {
-                        selected = new SettingFragment();
+                        selected = settings;
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                                 0, 0);
                         params.weight = 0.0f;
@@ -252,6 +265,8 @@ public class MainScreen extends AppCompatActivity {
 
     ;
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -290,6 +305,29 @@ public class MainScreen extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void updateProfile(String name, Uri avt) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .setPhotoUri(avt)
+                .build();
+
+
+        user.updateProfile(profileChangeRequest)
+                .addOnCompleteListener((new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(MainScreen.this,"Update profile sucessfully!",Toast.LENGTH_SHORT).show();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new SettingFragment()).commit();
+
+                        }
+                    }
+                }));
+    }
+
+
 
 
     //        rcvTest=findViewById(R.id.rcv_test);

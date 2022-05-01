@@ -53,7 +53,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/outline_account_circle_24">
+            android:src="@drawable/outline_account_circle_24"
+            android:id="@+id/avt">
 
 
 
@@ -66,13 +67,14 @@
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/custom_button"
             android:backgroundTint="@color/light_grey"
-            android:hint="Full Name">
+            android:hint="Full Name"
+            android:id="@+id/fullname">
 
 
         </EditText>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/updateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update Profile"
