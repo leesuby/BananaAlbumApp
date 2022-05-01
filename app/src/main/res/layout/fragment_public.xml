@@ -5,16 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/test_ava"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPic"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <TextView
         android:id="@+id/btnPic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="picture"
+        android:text="Chức năng đang được hoàn thiện trong phiên bản sắp tới."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </Button>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

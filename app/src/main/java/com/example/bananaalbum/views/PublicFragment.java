@@ -33,22 +33,13 @@ import java.util.Objects;
 
 public class PublicFragment extends Fragment {
 
-    Button btnPic;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_public, container, false);
-        btnPic = view.findViewById(R.id.btnPic);
 
-        btnPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PublicFragment.this.getActivity(), EditPhoto.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 }
