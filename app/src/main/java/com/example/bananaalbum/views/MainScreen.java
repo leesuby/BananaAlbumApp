@@ -232,9 +232,10 @@ public class MainScreen extends AppCompatActivity {
 
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //TODO mama: upload album của người dùng lên firebase với album a
+                Album a = new Album(name.getText().toString());
                 albumViewModel = new ViewModelProvider(MainScreen.this).get(AlbumViewModel.class);
-                albumViewModel.addAlbum(new Album(name.getText().toString()));
+                albumViewModel.addAlbum(a);
                 Toast.makeText(MainScreen.this, "Add Successfully", Toast.LENGTH_SHORT).show();
                 dg.dismiss();
             }

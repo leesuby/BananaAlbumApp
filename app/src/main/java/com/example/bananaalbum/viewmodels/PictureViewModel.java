@@ -13,6 +13,7 @@ public class PictureViewModel extends ViewModel {
     private final MutableLiveData<List<Picture>> listPictureLiveData;
     private List<Picture> listPicture;
     private boolean isEditMode = false;
+    private String albumname;
 
     String[] name = {"1", "2", "3", "4", "5"};
     int[] picture = {R.drawable.test_ava, R.drawable.test_ava2, R.drawable.test_ava3, R.drawable.test_ava4, R.drawable.app_name2};
@@ -25,6 +26,7 @@ public class PictureViewModel extends ViewModel {
 
     public void initData(){
         this.listPicture = new ArrayList<>();
+
         for (int i = 0; i < 25; i++) {
             listPicture.add(new Picture(picture[i % 5]));
         }
@@ -34,6 +36,10 @@ public class PictureViewModel extends ViewModel {
 
     public MutableLiveData<List<Picture>> getListPictureLiveData() {
         return listPictureLiveData;
+    }
+
+    public void setListPictureLiveData(ArrayList<Picture> list){
+        listPictureLiveData.setValue(list);
     }
 
     public void addPicture(Picture picture){
