@@ -68,7 +68,6 @@ public class AddPhoto extends AppCompatActivity {
                 editor.commit();
                 finish();
             }
-
         }
         ;
     }

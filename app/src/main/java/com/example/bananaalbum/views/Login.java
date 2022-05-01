@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
-
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +77,7 @@ public class Login extends AppCompatActivity {
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 SignInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString());
-
             }
         });
         //Action Sign-in with Google
@@ -133,10 +130,15 @@ public class Login extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-
-                        Toast.makeText(Login.this, "Sign-in Successfully",Toast.LENGTH_SHORT).show();
-                        ToMainScreen();
-                        finish();
+                        user = mAuth.getCurrentUser();
+                        if(user.isEmailVerified()==true){
+                            Toast.makeText(Login.this, "Sign-in Successfully",Toast.LENGTH_SHORT).show();
+                            ToMainScreen();
+                            finish();}
+                        else{
+                            validateEmail(user);
+                            Toast.makeText(Login.this, "Please validate your email",Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else {
                         Toast.makeText(Login.this, "Sign-in failed",Toast.LENGTH_SHORT).show();
@@ -203,9 +205,36 @@ public class Login extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         FirebaseUser user = mAuth.getCurrentUser();
 
-        if(account != null || user!=null){
-            Toast.makeText(this,"User Already Signed-in",Toast.LENGTH_SHORT).show();
+        if(account != null ){
+            Toast.makeText(this,"User Already Signed-in With Google Account",Toast.LENGTH_SHORT).show();
             ToMainScreen();
+        }else if(user!=null){
+            if(user.isEmailVerified()==false){
+
+            }
+            else{
+                Toast.makeText(this,"User Already Signed-in",Toast.LENGTH_SHORT).show();
+                ToMainScreen();
+            }
+
         }
+    }
+    private void validateEmail(FirebaseUser user){
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Login.this,
+                                    "Verification email sent to " + user.getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e(TAG, "sendEmailVerification", task.getException());
+                            Toast.makeText(Login.this,
+                                    "Failed to send verification email.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

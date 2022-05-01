@@ -6,28 +6,6 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/SU_TextName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:background="@drawable/custom_edittext_email"
-        android:drawableStart="@drawable/ic_baseline_person_24"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/btnName"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:paddingLeft="20dp"
-        android:textAlignment="gravity"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
         android:id="@+id/SU_TextEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,8 +24,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SU_TextName"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.014" />
 
     <EditText
         android:id="@+id/SU_TextPassword"
