@@ -17,7 +17,7 @@
         android:background="@drawable/bg_gradient_lightyello_lightpink">
 
         <ImageButton
-            android:id="@+id/btn_backAlbum"
+            android:id="@+id/btn_backChangeEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

@@ -122,7 +122,8 @@ public class SettingFragment extends Fragment {
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new UpdateProfile()).commit();
+                Intent intent = new Intent(mainScreen, UpdateProfile.class);
+                startActivity(intent);
             }
         });
         logoutBtn.setOnClickListener(new View.OnClickListener() {

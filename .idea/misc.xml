@@ -31,11 +31,15 @@
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_info.xml" value="0.1605" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_photo_album.xml" value="0.1" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_album.xml" value="0.26383526383526384" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_change_email.xml" value="0.25" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_edit.xml" value="0.2203125" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_login.xml" value="0.152" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_main.xml" value="0.1403985507246377" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_main_screen.xml" value="0.1403985507246377" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_signup.xml" value="0.22395833333333334" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/detail_image.xml" value="0.234375" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/dialog_addalbum.xml" value="0.2" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/dialog_confirm_deletealbum.xml" value="0.234375" />

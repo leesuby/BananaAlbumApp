@@ -20,6 +20,8 @@ import com.example.bananaalbum.R;
 import com.example.bananaalbum.adapters.AlbumAdapter;
 import com.example.bananaalbum.model.Album;
 import com.example.bananaalbum.viewmodels.AlbumViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class HomeFragment extends Fragment {
     EditText SearchBar;
     AlbumViewModel albumViewModel;
     AlbumAdapter albumAdapter;
-
+    FirebaseUser user;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,10 +44,12 @@ public class HomeFragment extends Fragment {
         BinBtn = homeFrag.findViewById(R.id.btnBin);
         SearchBar = homeFrag.findViewById(R.id.search_field);
         AlbumRecView = homeFrag.findViewById(R.id.AlbumRecView);
-
+        //firebase
+        user =  FirebaseAuth.getInstance().getCurrentUser();
 
         albumViewModel = new ViewModelProvider(this.getActivity()).get(AlbumViewModel.class);
         //TODO mama: lấy album của người dùng về
+        albumViewModel.loadData(user.getUid());
 
         albumViewModel.getListAlbumLiveData().observe(this.getActivity(), new Observer<List<Album>>() {
             @Override
