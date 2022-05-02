@@ -160,6 +160,16 @@ public class EditPhoto extends AppCompatActivity {
                 sendBroadcast(intent);
             }
         });
+
+        FloatingActionButton btnBack = findViewById(R.id.Backbtn);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditPhoto.this, MainScreen.class);
+                startActivity(intent);
+            }
+        });
+
         btnUndo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
