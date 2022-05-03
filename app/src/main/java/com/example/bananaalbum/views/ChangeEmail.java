@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +22,10 @@ public class ChangeEmail extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View change_email=  inflater.inflate(R.layout.activity_change_email, container,false );
         back = change_email.findViewById(R.id.btn_backChangeEmail);
-        MainScreen mainScreen = (MainScreen)getActivity();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new SettingFragment()).commit();
+
             }
         });
         return change_email;
