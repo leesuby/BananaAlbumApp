@@ -38,6 +38,8 @@ import com.example.bananaalbum.model.Picture;
 import com.example.bananaalbum.viewmodels.AlbumViewModel;
 import com.example.bananaalbum.viewmodels.PictureViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -89,12 +91,12 @@ public class ViewAlbum extends AppCompatActivity {
         tcontainer = findViewById(R.id.tcontainer);
         AlbumName.setText(a.getName());
         album_info = findViewById(R.id.album_info);
-
+        //firebase
+        FirebaseUser user =  FirebaseAuth.getInstance().getCurrentUser();
 
         // ViewModel for RecylerView Picture
         viewModel = new ViewModelProvider(this).get(PictureViewModel.class);
         //TODO mama: lấy toàn bộ ảnh thuộc AlbumName(biến ở trên) về
-
         viewModel.getListPictureLiveData().observe(this, new Observer<List<Picture>>() {
             @Override
             public void onChanged(List<Picture> pictures) {

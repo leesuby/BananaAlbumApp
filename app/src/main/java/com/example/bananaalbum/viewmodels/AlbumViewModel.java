@@ -56,10 +56,11 @@ public class AlbumViewModel extends ViewModel {
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot next = (DataSnapshot) iterator.next();
-                    listAlbum.add(new Album(next.child("name").getValue().toString()));
+                    if(next.child("name").getValue()!=null){
+                        listAlbum.add(new Album(next.child("name").getValue().toString()));
+                    }
                 }
                 listAlbumLiveData.setValue(listAlbum);
-
             }
 
             @Override
