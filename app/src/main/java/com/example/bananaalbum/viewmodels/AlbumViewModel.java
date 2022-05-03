@@ -35,10 +35,6 @@ public class AlbumViewModel extends ViewModel {
     private void initData() {
         listAlbum = new ArrayList<>();
 
-        listAlbum.add(new Album("hihi"));
-        listAlbum.add(new Album("hoho"));
-        listAlbum.add(new Album("huhu"));
-
         listAlbumLiveData.setValue(listAlbum);
     }
 
