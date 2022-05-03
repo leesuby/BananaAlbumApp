@@ -79,6 +79,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         getUserInfo();
 
+
         up_avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,8 +97,9 @@ public class UpdateProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String fname= fullname.getText().toString().trim();
-                updateProfile(fname);
-                uploadImage();
+                if (fname.length()!=0)
+                    updateProfile(fname);
+
             }
         });
 
@@ -157,7 +159,7 @@ public class UpdateProfile extends AppCompatActivity {
 
                             Toast.makeText(UpdateProfile.this,"Update profile sucessfully!",Toast.LENGTH_SHORT).show();
 
-
+                            uploadImage();
                         }
                     }
                 }));
@@ -196,6 +198,7 @@ public class UpdateProfile extends AppCompatActivity {
                             String imageReference = uri.toString();
                             reference.child("data").child(user.getUid()).child("profile").setValue(imageReference);
                             Toast.makeText(UpdateProfile.this,"Update avatar sucessfully!",Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                 }

@@ -36,7 +36,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
@@ -95,14 +99,9 @@ public class SettingFragment extends Fragment {
             accountLayout.setVisibility(View.GONE);
         }
         else if (user != null){
-            String name = user.getDisplayName();
-            Uri avatarURI = user.getPhotoUrl();
-            if (name != null)
-                username.setText(name);
-                email.setText(user.getEmail());
-            if (avatarURI != null)
-                Picasso.get().load(avatarURI).into(avatar);
-                accountLayout.setVisibility(View.VISIBLE);
+            getUserInfo();
+
+            accountLayout.setVisibility(View.VISIBLE);
         }
 
 
@@ -136,6 +135,44 @@ public class SettingFragment extends Fragment {
         return userSetting;
     }
 
+    private void getUserInfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String name = user.getDisplayName();
+
+        if (name != null)
+            username.setText(name);
+        email.setText(user.getEmail());
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference reference = firebaseDatabase.getReference();
+        reference.child("data").child(user.getUid()).child("profile").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            String uri = ""+dataSnapshot.getValue();
+                            if (uri.length()!=0)
+                                Picasso.get().load(Uri.parse(uri)).into(avatar);
+
+                            // your name values you will get here
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("TAG", " it's null.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("onCancelled", " cancelled");
+            }
+        });
+    }
 
 
     public static String capitalizeString(String string) {
@@ -152,5 +189,9 @@ public class SettingFragment extends Fragment {
         return String.valueOf(chars);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserInfo();
+    }
 }
