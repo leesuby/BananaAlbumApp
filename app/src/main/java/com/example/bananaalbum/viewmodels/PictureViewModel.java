@@ -1,10 +1,19 @@
 package com.example.bananaalbum.viewmodels;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.bananaalbum.R;
+import com.example.bananaalbum.model.Album;
 import com.example.bananaalbum.model.Picture;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
