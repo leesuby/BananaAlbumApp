@@ -17,7 +17,7 @@
         android:background="@drawable/bg_gradient_lightyello_lightpink">
 
         <ImageButton
-            android:id="@+id/btn_backChangeEmail"
+            android:id="@+id/btnbackChangeEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -51,10 +51,10 @@
         android:layout_marginBottom="5dp"
         android:backgroundTint="@color/white"
         android:background="@drawable/custom_edittext_email"
-        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawableStart="@drawable/round_key_24"
         android:drawablePadding="15dp"
         android:ems="10"
-        android:hint="New email"
+        android:hint="Current Password"
         android:inputType="textPassword"
 
         android:paddingLeft="15dp"
@@ -63,35 +63,55 @@
         android:textSize="14dp"
         />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/NewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/button"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:text="Change email"
-            android:textColor="@color/white"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginVertical="20dp"
-            android:backgroundTint="@color/light_pink"
-            android:background="@drawable/custom_button_login"/>
+        android:layout_marginHorizontal="20dp"
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:textColor="@color/dark_grey"
-            android:background="@drawable/custom_button_login"
-            android:backgroundTint="@color/grey"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginVertical="20dp"/>
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/custom_edittext_email"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="New Email"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/white"
+        android:paddingLeft="15dp"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/changeEmailBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change email"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="15dp"
+        android:backgroundTint="@color/light_pink"
+        android:background="@drawable/custom_button_login"/>
+
+    <Button
+        android:id="@+id/cancelbtne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textColor="@color/dark_grey"
+        android:background="@drawable/custom_button_login"
+        android:backgroundTint="@color/grey"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/forgotpwE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:text="Forgot password?"
+        android:textColor="@color/crimson"/>
 
 
 </LinearLayout>

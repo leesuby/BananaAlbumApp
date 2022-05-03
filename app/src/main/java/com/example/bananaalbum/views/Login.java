@@ -219,7 +219,7 @@ public class Login extends AppCompatActivity {
 
         }
     }
-    private void validateEmail(FirebaseUser user){
+    public void validateEmail(FirebaseUser user){
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener() {
                     @Override
