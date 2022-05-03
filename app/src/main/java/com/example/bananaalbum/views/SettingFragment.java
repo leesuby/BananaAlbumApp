@@ -57,7 +57,7 @@ public class SettingFragment extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
     Context con;
     CircleImageView avatar;
-
+    MainScreen mainScreen;
 
     FirebaseAuth mAuth;
     Uri imgURI;
@@ -81,7 +81,7 @@ public class SettingFragment extends Fragment {
         updateProfile =userSetting.findViewById(R.id.update_profile);
         accountLayout = userSetting.findViewById(R.id.accLayout);
         // get Google account
-        MainScreen mainScreen = (MainScreen)getActivity();
+         mainScreen= (MainScreen)getActivity();
         account = mainScreen.account;
         mGoogleSignInClient = mainScreen.client;
         mAuth=FirebaseAuth.getInstance();
@@ -109,13 +109,15 @@ public class SettingFragment extends Fragment {
         changePw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new ChangePassword()).commit();
+                Intent intent = new Intent(mainScreen, ChangePassword.class);
+                startActivity(intent);
             }
         });
         changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainScreen.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_navTab, new ChangeEmail()).commit();
+                Intent intent = new Intent(mainScreen, ChangeEmail.class);
+                startActivity(intent);
             }
         });
         updateProfile.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +144,7 @@ public class SettingFragment extends Fragment {
         if (name != null)
             username.setText(name);
         email.setText(user.getEmail());
+
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference reference = firebaseDatabase.getReference();
@@ -192,6 +195,7 @@ public class SettingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mainScreen.user= FirebaseAuth.getInstance().getCurrentUser();
         getUserInfo();
     }
 }

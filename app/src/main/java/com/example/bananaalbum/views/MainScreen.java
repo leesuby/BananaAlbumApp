@@ -88,7 +88,7 @@ public class MainScreen extends AppCompatActivity {
     public GoogleSignInClient client;
     FirebaseAuth mAuth;
     private SettingFragment settings;
-    FirebaseUser user;
+    public FirebaseUser user;
     CircleImageView avatar;
     FrameLayout fr;
     ConstraintLayout topbar;
@@ -399,6 +399,7 @@ public class MainScreen extends AppCompatActivity {
         else {
             Intent intent= new Intent(MainScreen.this,Login.class);
             startActivity(intent);
+            finish();
         }
     }
 
