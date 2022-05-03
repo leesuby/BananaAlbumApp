@@ -37,9 +37,17 @@ import com.example.bananaalbum.model.Album;
 import com.example.bananaalbum.model.Picture;
 import com.example.bananaalbum.viewmodels.AlbumViewModel;
 import com.example.bananaalbum.viewmodels.PictureViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,6 +61,7 @@ public class ViewAlbum extends AppCompatActivity {
     PictureViewModel viewModel;
     ViewGroup tcontainer;
     LinearLayout album_info;
+    FirebaseUser user;
 
 
 
@@ -77,6 +86,9 @@ public class ViewAlbum extends AppCompatActivity {
             return;
         }
         Album a = (Album) bundle.get("album");
+//        Bundle bundle = new Bundle();
+//        bundle.putString("albumName","Long");
+
 
         //get widget
         AlbumName = findViewById(R.id.tv_albumNameOnAlbum);
@@ -90,6 +102,7 @@ public class ViewAlbum extends AppCompatActivity {
         floatingDeleteActionButton = findViewById(R.id.flbtnDelete_album);
         tcontainer = findViewById(R.id.tcontainer);
         AlbumName.setText(a.getName());
+        //AlbumName.setText("haha");
         album_info = findViewById(R.id.album_info);
         //firebase
         FirebaseUser user =  FirebaseAuth.getInstance().getCurrentUser();
@@ -207,6 +220,22 @@ public class ViewAlbum extends AppCompatActivity {
 
     }
 
+    private void signin() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword("leesuby.tl@gmail.com", "tl123456").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    user = mAuth.getCurrentUser();
+                    Toast.makeText(ViewAlbum.this, "Sign-in Successfully",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(ViewAlbum.this, "Sign-in failed",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private void openConfirmDialog() {
         final Dialog dg = new Dialog(this);
         dg.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -281,21 +310,50 @@ public class ViewAlbum extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
-        SharedPreferences sharedPref = this.getSharedPreferences("uri", Context.MODE_PRIVATE);
-        String uriString = sharedPref.getString("uri", "");
-        SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = mySPrefs.edit();
-        editor.remove("uri");
-        editor.apply();
 
-        String AlbumName = this.AlbumName.getText().toString();
-
+        //signin();
+        user =FirebaseAuth.getInstance().getCurrentUser();
+        //String AlbumName = this.AlbumName.getText().toString();
+        String AlbumName = "Long";
         //TODO mama: upload ảnh vào albumName của người dùng
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference reference = firebaseDatabase.getReference();
+        reference.child("data").child(user.getUid()).child("Album").child(AlbumName).child("Images").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
+//                    if (dataSnapshot.getValue() != null) {
+//                        try {
+//                            Log.e("TAG", avatarURI);
+//                            Picasso.get().load(Uri.parse(""+dataSnapshot.getValue())).into(avatar);
+//
+//                            // your name values you will get here
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        Log.e("TAG", " it's null.");
+//                    }
+                    for (DataSnapshot postSnapshot :dataSnapshot.getChildren()) {
+                        //TODO Long: truyền uri Image (postSnapshot.getValue()) vào adapter
+                        Log.e("ViewAlbum", ""+postSnapshot.getValue());
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("onCancelled", " cancelled");
+            }
+        });
 
 //        if(uriString.length()!=0){
 //            Picasso.get().load(Uri.parse(uriString)).into(up_avatar);
 //        }
-        Toast.makeText(this,uriString,Toast.LENGTH_SHORT).show();
+
 
     }
 }
