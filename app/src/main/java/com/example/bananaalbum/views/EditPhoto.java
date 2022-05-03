@@ -22,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -134,6 +135,7 @@ public class EditPhoto extends AppCompatActivity {
         btnAddAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 BitmapDrawable draw = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = draw.getBitmap();
                 FileOutputStream outStream = null;
@@ -158,6 +160,7 @@ public class EditPhoto extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 intent.setData(Uri.fromFile(outFile));
                 sendBroadcast(intent);
+                Toast.makeText(EditPhoto.this,"Save picture successfully",Toast.LENGTH_SHORT).show();
             }
         });
 

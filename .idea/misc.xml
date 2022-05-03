@@ -28,8 +28,10 @@
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_clear.xml" value="0.1045" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_delete.xml" value="0.1035" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_edit.xml" value="0.1" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_flip_camera_android.xml" value="0.118" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_info.xml" value="0.1605" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_photo_album.xml" value="0.1" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/drawable/ic_baseline_save.xml" value="0.103" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_album.xml" value="0.26383526383526384" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_change_email.xml" value="0.25" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
@@ -56,6 +58,7 @@
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/user_setting_layout.xml" value="0.234375" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/layout/user_setting_screen.xml" value="0.264" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/menu/album_menu.xml" value="0.20208333333333334" />
+        <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/menu/edit_tab_bar.xml" value="0.1" />
         <entry key="..\:/Life/Nam3/HK2/Mobile/Project/Project/Code/BananaAlbumApp/app/src/main/res/menu/main_tab_bar.xml" value="0.175" />
         <entry key="..\:/Users/ACER/Documents/GitHub/BananaAlbumApp/app/src/main/res/drawable/custom_button.xml" value="0.2435" />
         <entry key="..\:/Users/ACER/Documents/GitHub/BananaAlbumApp/app/src/main/res/drawable/custom_button_login.xml" value="0.1" />
