@@ -55,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewAlbum extends AppCompatActivity {
-    TextView AlbumName;
+    TextView AlbumName,AlbumNameDetail,Date_created,Location_created;
     RecyclerView rcvPic;
     ImageButton backBtn,editBtn,infoBtn,exitEditBtn,deleteBtn;
     FloatingActionButton floatingAddActionButton,floatingDeleteActionButton;
@@ -101,8 +101,14 @@ public class ViewAlbum extends AppCompatActivity {
         deleteBtn = findViewById(R.id.deleteAlbumBtn);
         floatingAddActionButton = findViewById(R.id.flbtnAdd_album);
         floatingDeleteActionButton = findViewById(R.id.flbtnDelete_album);
+        AlbumNameDetail = findViewById(R.id.AlbumName);
+        Date_created = findViewById(R.id.DateCreated);
+        Location_created = findViewById(R.id.LocationCreated);
         tcontainer = findViewById(R.id.tcontainer);
         AlbumName.setText(a.getName());
+        AlbumNameDetail.setText(a.getName());
+        Date_created.setText(a.getDate_created());
+        Location_created.setText(a.getLocation_created());
         //AlbumName.setText("haha");
         album_info = findViewById(R.id.album_info);
         //firebase

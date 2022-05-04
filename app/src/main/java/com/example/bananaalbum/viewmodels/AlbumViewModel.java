@@ -56,8 +56,8 @@ public class AlbumViewModel extends ViewModel {
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot next = (DataSnapshot) iterator.next();
-                    if(next.child("name").getValue()!=null){
-                        listAlbum.add(new Album(next.child("name").getValue().toString()));
+                    if(next.child("name").getValue()!=null &&next.child("date_created").getValue()!= null && next.child("location_created").getValue()!=null){
+                        listAlbum.add(new Album(next.child("name").getValue().toString(),next.child("location_created").getValue().toString(),next.child("date_created").getValue().toString()));
                     }
                 }
                 listAlbumLiveData.setValue(listAlbum);

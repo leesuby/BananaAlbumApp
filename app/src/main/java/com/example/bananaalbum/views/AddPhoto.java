@@ -91,7 +91,7 @@ public class AddPhoto extends AppCompatActivity {
         }
         Album a = (Album) bundle.get("album");
         AlbumName =a.getName();
-       
+
 
         add_photo.setOnClickListener(new View.OnClickListener() {
             @Override

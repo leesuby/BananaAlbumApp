@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +20,15 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -72,6 +78,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.Executor;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -94,7 +102,7 @@ public class MainScreen extends AppCompatActivity {
     ConstraintLayout topbar;
 
     private String avatarURI ="";
-
+    private String Location_Created="";
 
 
     @Override
@@ -145,6 +153,7 @@ public class MainScreen extends AppCompatActivity {
 
         BottomNavigationView navTab = findViewById(R.id.navBar);
 
+        Log.e("LOCATION",Location_Created);
 
         topbar=findViewById(R.id.topbar);
         fr = findViewById(R.id.fragment_navTab);
@@ -255,6 +264,8 @@ public class MainScreen extends AppCompatActivity {
         btnAddAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                get_GPs(view);
+                Log.e("LOCATION",Location_Created);
                 openAddAlbumDialog();
 
             }
@@ -294,7 +305,11 @@ public class MainScreen extends AppCompatActivity {
                 //firebase database
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("data").child(user.getUid());;
                 //create album in database
-                Album album = new Album(name.getText().toString());
+
+
+                String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                Album album = new Album(name.getText().toString(),Location_Created,currentDateandTime);
+                Log.e("LOCATION",Location_Created);
                 databaseReference.child(name.getText().toString()).setValue(album);
                 //firebase storage
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid());
@@ -409,6 +424,58 @@ public class MainScreen extends AppCompatActivity {
 
     public void setAvatarURI(String avatarURI) {
         this.avatarURI = avatarURI;
+    }
+
+
+    public void get_GPs(View view){
+        // xin quyen
+        if (ContextCompat.checkSelfPermission(this , Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    },
+                    99);
+        }else {
+            // lay du lieu cho vao text
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//            lay gps tu vi tri cuoi cung luu tren thiet bi
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null){
+                Location_Created = "Lat: " + location.getLatitude() + " \nLon: " + location.getLongitude();
+
+                
+            }
+//            lay gps tu internet hoac song gps cua thiet bi
+            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,
+                    0, 0,
+                    new LocationListener() {
+                        @Override
+                        public void onLocationChanged(Location location) {
+                            Location_Created = "Lat: " + location.getLatitude() + " \nLon: " + location.getLongitude();
+
+
+                        }
+
+                        @Override
+                        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                        }
+
+                        @Override
+                        public void onProviderEnabled(String provider) {
+
+                        }
+
+                        @Override
+                        public void onProviderDisabled(String provider) {
+
+                        }
+                    });
+        }
     }
 
 
