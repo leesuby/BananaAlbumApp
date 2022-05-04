@@ -51,19 +51,13 @@ public class PictureRecylerAdapter extends RecyclerView.Adapter<PictureRecylerAd
         if (picture == null){
             return;
         }
-
-        if(picture.getResourceId() != 0) {
-            holder.img.setImageResource(picture.getResourceId());
-        }
-
-        if(picture.getUri()!= null){
-            Picasso.get().load(Uri.parse(picture.getUri())).into(holder.img);
-        }
-
+        holder.img.setImageResource(picture.getResourceId());
+        //Picasso.get().load(Uri.parse(picture.getUri())).into(holder.img);
         //event click listener for every picture
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (iseditMode==false)
                     onClickDetailPicture(picture);
                 else

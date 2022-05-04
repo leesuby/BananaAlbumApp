@@ -117,7 +117,7 @@ public class ViewAlbum extends AppCompatActivity {
         // ViewModel for RecylerView Picture
         viewModel = new ViewModelProvider(this).get(PictureViewModel.class);
         //TODO mama: lấy toàn bộ ảnh thuộc AlbumName(biến ở trên) về
-        viewModel.loadImages(user.getUid(),AlbumName.getText().toString());
+        //viewModel.loadImages(user.getUid(),AlbumName.getText().toString());
         viewModel.getListPictureLiveData().observe(this, new Observer<List<Picture>>() {
             @Override
             public void onChanged(List<Picture> pictures) {
