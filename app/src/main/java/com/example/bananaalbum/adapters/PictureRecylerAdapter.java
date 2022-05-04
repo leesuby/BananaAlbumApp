@@ -3,6 +3,7 @@ package com.example.bananaalbum.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.bananaalbum.model.Picture;
 import com.example.bananaalbum.views.EditPhoto;
 import com.example.bananaalbum.views.ViewAlbum;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class PictureRecylerAdapter extends RecyclerView.Adapter<PictureRecylerAd
             return;
         }
         holder.img.setImageResource(picture.getResourceId());
-
+        //Picasso.get().load(Uri.parse(picture.getUri())).into(holder.img);
         //event click listener for every picture
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override

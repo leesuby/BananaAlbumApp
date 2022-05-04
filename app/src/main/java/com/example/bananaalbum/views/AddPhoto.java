@@ -43,6 +43,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bananaalbum.R;
+import com.example.bananaalbum.model.Album;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -84,7 +85,13 @@ public class AddPhoto extends AppCompatActivity {
         uploadBtn= findViewById(R.id.uploadImageBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
         //TODO Long: truyền Album name từ ViewAlbum sang act này
-        AlbumName ="Long";
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+        Album a = (Album) bundle.get("album");
+        AlbumName =a.getName();
+       
 
         add_photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +117,7 @@ public class AddPhoto extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == MainActivity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             if (requestCode == RI) {
                 imageUri = data.getData();
                 Picasso.get().load(imageUri).into(add_photo);
@@ -149,7 +156,7 @@ public class AddPhoto extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             String imageReference = uri.toString();
-                            reference.child("data").child(user.getUid()).child("Album").child(AlbumName).child("Images").child(nameImg).setValue(imageReference);
+                            reference.child("data").child(user.getUid()).child(AlbumName).child("Images").child(nameImg).setValue(imageReference);
                             Toast.makeText(AddPhoto.this,"Upload Image sucessfully!",Toast.LENGTH_SHORT).show();
                             finish();
                         }

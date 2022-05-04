@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bananaalbum.R;
+import com.example.bananaalbum.adapters.AlbumAdapter;
 import com.example.bananaalbum.adapters.PictureAdapter;
 import com.example.bananaalbum.adapters.PictureRecylerAdapter;
 import com.example.bananaalbum.model.Album;
@@ -105,11 +106,12 @@ public class ViewAlbum extends AppCompatActivity {
         //AlbumName.setText("haha");
         album_info = findViewById(R.id.album_info);
         //firebase
-        FirebaseUser user =  FirebaseAuth.getInstance().getCurrentUser();
-
+        //FirebaseUser user =  FirebaseAuth.getInstance().getCurrentUser();
+        user =FirebaseAuth.getInstance().getCurrentUser();
         // ViewModel for RecylerView Picture
         viewModel = new ViewModelProvider(this).get(PictureViewModel.class);
         //TODO mama: lấy toàn bộ ảnh thuộc AlbumName(biến ở trên) về
+        //viewModel.loadImages(user.getUid(),AlbumName.getText().toString());
         viewModel.getListPictureLiveData().observe(this, new Observer<List<Picture>>() {
             @Override
             public void onChanged(List<Picture> pictures) {
@@ -118,6 +120,7 @@ public class ViewAlbum extends AppCompatActivity {
                     adapter.setData(pictures, ViewAlbum.this,true);
                 else
                     adapter.setData(pictures, ViewAlbum.this,false);
+
                 rcvPic.setAdapter(adapter);
             }
         });
@@ -140,6 +143,9 @@ public class ViewAlbum extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ViewAlbum.this, AddPhoto.class);
+                Bundle data = new Bundle();
+                data.putSerializable("album", a);
+                intent.putExtras(data);
                 startActivity(intent);
 
             }
@@ -312,13 +318,13 @@ public class ViewAlbum extends AppCompatActivity {
         super.onResume();
 
         //signin();
-        user =FirebaseAuth.getInstance().getCurrentUser();
+
         //String AlbumName = this.AlbumName.getText().toString();
-        String AlbumName = "Long";
+        String AlbumName = this.AlbumName.getText().toString();
         //TODO mama: upload ảnh vào albumName của người dùng
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference reference = firebaseDatabase.getReference();
-        reference.child("data").child(user.getUid()).child("Album").child(AlbumName).child("Images").addValueEventListener(new ValueEventListener() {
+        reference.child("data").child(user.getUid()).child(AlbumName).child("Images").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
