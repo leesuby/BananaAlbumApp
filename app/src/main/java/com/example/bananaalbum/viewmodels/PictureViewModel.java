@@ -43,11 +43,6 @@ public class PictureViewModel extends ViewModel {
 
     public void initData(){
         this.listPicture = new ArrayList<>();
-
-        for (int i = 0; i < 25; i++) {
-            listPicture.add(new Picture(picture[i % 5]));
-        }
-
         listPictureLiveData.setValue(listPicture);
     }
 
@@ -99,19 +94,20 @@ public class PictureViewModel extends ViewModel {
 
 
     public void loadImages(String uid, String albumName) {
+        listPicture = new ArrayList<>();
+        for (int i = 0; i < 25; i++) {
+            listPicture.add(new Picture(picture[i % 5]));
+        }
+
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("data").child(uid).child(albumName).child("Images").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
                 for (DataSnapshot postSnapshot :snapshot.getChildren()) {
                     //TODO Long: truyền uri Image (postSnapshot.getValue()) vào adapter
-                    //Log.e("ViewAlbum", ""+postSnapshot.getValue());
-                    listPicture.add(new Picture(""+postSnapshot.getValue()) );
-
+                    Log.e("ViewAlbum", ""+postSnapshot.getValue());
+                    listPicture.add(new Picture(""+postSnapshot.getValue()));
                 }
-
                 listPictureLiveData.setValue(listPicture);
             }
 

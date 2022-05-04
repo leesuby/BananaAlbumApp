@@ -15,6 +15,7 @@ public class Picture implements Serializable {
     }
     public Picture(String uri){
         this.uri = uri;
+        this.resourceId=0;
     }
 
     public int getResourceId() {

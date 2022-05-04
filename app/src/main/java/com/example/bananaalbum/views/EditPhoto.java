@@ -35,6 +35,7 @@ import com.example.bananaalbum.model.Picture;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,6 +81,8 @@ public class EditPhoto extends AppCompatActivity {
         btnRedo = findViewById(R.id.RedoBtn);
         imageView = findViewById(R.id.imageView5);
         imageView.setImageResource(p.getResourceId());
+//        Picasso.get().load(Uri.parse(p.getUri())).into(imageView);
+
         BitmapDrawable draw = (BitmapDrawable) imageView.getDrawable();
         Bitmap baseBitmap = draw.getBitmap();
         undoList.add(baseBitmap);
